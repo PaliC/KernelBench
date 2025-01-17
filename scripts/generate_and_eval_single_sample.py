@@ -41,6 +41,7 @@ class EvalConfig(Config):
         # you can either specify SM version or just use the name
         self.gpu_arch = ["Ada"]
 
+        self.framework = "cuda"
 
         # Inference config
         self.server_type = "deepseek"
@@ -87,6 +88,8 @@ def main(config: EvalConfig):
 
     if config.log:
         os.makedirs(config.logdir, exist_ok=True)
+    
+    assert config.framework in ["cuda", "triton"], f"Framework {config.framework} not supported please choose from cuda or triton"
         
     # Problem Checks
     num_problems = len(curr_level_dataset)
@@ -127,17 +130,19 @@ def main(config: EvalConfig):
                                                         time_generation=True)
     
 
-
-    custom_cuda_prompt = prompt_generate_custom_cuda_from_prompt_template(ref_arch_src)
+    custom_cuda_prompt = prompt_generate_custom_cuda_from_prompt_template(ref_arch_src, framework=config.framework)
     if config.log_prompt:
         with open(os.path.join(config.logdir, f"prompt_level_{config.level}_problem_{config.problem_id}.txt"), "w") as f:
             f.write(custom_cuda_prompt)
-
+    print(f"custom_cuda_prompt: {custom_cuda_prompt}")
+    exit()
     # Query server with constructed prompt
     custom_cuda = inference_server(custom_cuda_prompt)
     custom_cuda = extract_first_code(custom_cuda, ["python", "cpp"])
     # check LLM is able to generate custom CUDA code
     assert custom_cuda is not None, "Custom CUDA code generation failed"
+    print(f"custom_cuda: {custom_cuda}")
+    exit()
     
     # this should be optional
     if config.log:

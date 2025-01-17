@@ -7,7 +7,7 @@ import sys
 import random
 import re
 import hashlib
-import utils
+import src.utils as utils
 
 REPO_TOP_PATH = os.path.abspath(
     os.path.join(

@@ -34,18 +34,24 @@ def get_arch_definition(arch_src):
 ############################################
 # CUDA Prompt
 ############################################
-PROBLEM_STATEMENT = """You write custom CUDA kernels to replace the pytorch operators in the given architecture to get speedups. \n
+PROBLEM_STATEMENT_CUDA = """You write custom CUDA kernels to replace the pytorch operators in the given architecture to get speedups. \n
     You have complete freedom to choose the set of operators you want to replace. You may make the decision to replace some operators with custom CUDA kernels and leave others unchanged. You may replace multiple operators with custom implementations, consider operator fusion opportunities (combining multiple operators into a single kernel, for example, combining matmul+relu), or algorithmic changes (such as online softmax). You are only limited by your imagination.\n
 """
-PROBLEM_INSTRUCTION = """
+PROBLEM_INSTRUCTION_CUDA = """
 Optimize the architecture named Model with custom CUDA operators! Name your optimized output architecture ModelNew. Output the new code in codeblocks. Please generate real code, NOT pseudocode, make sure the code compiles and is fully functional. Just output the new model code, no other text, and NO testing code! \n
+"""
+PROBLEM_STATEMENT_TRITON = """You write custom Triton kernels to replace the pytorch operators in the given architecture to get speedups. \n
+    You have complete freedom to choose the set of operators you want to replace. You may make the decision to replace some operators with custom Triton kernels and leave others unchanged. You may replace multiple operators with custom implementations, consider operator fusion opportunities (combining multiple operators into a single kernel, for example, combining matmul+relu), or algorithmic changes (such as online softmax). You are only limited by your imagination.\n
+"""
+PROBLEM_INSTRUCTION_TRITON = """
+Optimize the architecture named Model with custom Triton kernels! Name your optimized output architecture ModelNew. Output the new code in codeblocks. Please generate real code, NOT pseudocode, make sure the code compiles and is fully functional. Just output the new model code, no other text, and NO testing code! \n
 """
 
 
 def prompt_generate_custom_cuda(
-    arc_src: str, example_arch_src: str, example_new_arch_src: str
+    arc_src: str, example_arch_src: str, example_new_arch_src: str, problem_statement: str
 ) -> str:
-    prompt = PROBLEM_STATEMENT
+    prompt = problem_statement
 
     if example_arch_src != "" and example_new_arch_src != "":
         prompt += f"""
@@ -65,14 +71,44 @@ def prompt_generate_custom_cuda(
     {arc_src}
     ```
     """
-    prompt += PROBLEM_INSTRUCTION
+    prompt += PROBLEM_INSTRUCTION_CUDA
     return prompt
 
 
-PROBLEM_STATEMENT_CLEANED = """You write custom CUDA kernels to replace the pytorch operators in the given architecture to get speedups.\n\nYou have complete freedom to choose the set of operators you want to replace. You may make the decision to replace some operators with custom CUDA kernels and leave others unchanged. You may replace multiple operators with custom implementations, consider operator fusion opportunities (combining multiple operators into a single kernel, for example, combining matmul+relu), or algorithmic changes (such as online softmax). You are only limited by your imagination.\n
+def prompt_generate_custom_triton(arc_src: str, example_arch_src: str, example_new_arch_src: str, problem_statement: str) -> str:
+    prompt = problem_statement
+
+    if example_arch_src != "" and example_new_arch_src != "":
+        prompt += f"""
+        Here's an example to show you the syntax of inline embedding custom Triton kernels in torch: The example given architecture is: \n
+        ``` \n
+        {example_arch_src}
+        ``` \n
+        The example new arch with custom Triton kernels looks like this: 
+        ```
+        {example_new_arch_src}
+        ``` \n
+        """
+    prompt += f"""
+    You are given the following architecture: \n
+    ```
+    {arc_src}
+    ```
+    """
+    prompt += PROBLEM_INSTRUCTION_TRITON
+    return prompt
+
+
+PROBLEM_STATEMENT_CUDA_CLEANED = """You write custom CUDA kernels to replace the pytorch operators in the given architecture to get speedups.\n\nYou have complete freedom to choose the set of operators you want to replace. You may make the decision to replace some operators with custom CUDA kernels and leave others unchanged. You may replace multiple operators with custom implementations, consider operator fusion opportunities (combining multiple operators into a single kernel, for example, combining matmul+relu), or algorithmic changes (such as online softmax). You are only limited by your imagination.\n
 """
-PROBLEM_INSTRUCTION_CLEANED = """
+PROBLEM_INSTRUCTION_CUDA_CLEANED = """
 Optimize the architecture named Model with custom CUDA operators! Name your optimized output architecture ModelNew. Output the new code in codeblocks. Please generate real code, NOT pseudocode, make sure the code compiles and is fully functional. Just output the new model code, no other text, and NO testing code! \n
+"""
+
+PROBLEM_STATEMENT_TRITON_CLEANED = """You write custom Triton kernels to replace the pytorch operators in the given architecture to get speedups.\n\nYou have complete freedom to choose the set of operators you want to replace. You may make the decision to replace some operators with custom Triton kernels and leave others unchanged. You may replace multiple operators with custom implementations, consider operator fusion opportunities (combining multiple operators into a single kernel, for example, combining matmul+relu), or algorithmic changes (such as online softmax). You are only limited by your imagination.\n
+"""
+PROBLEM_INSTRUCTION_TRITON_CLEANED = """
+Optimize the architecture named Model with custom Triton kernels! Name your optimized output architecture ModelNew. Output the new code in codeblocks. Please generate real code, NOT pseudocode, make sure the code compiles and is fully functional. Just output the new model code, no other text, and NO testing code! \n
 """
 
 def prompt_generate_custom_cuda_fewshot_and_template(ref_arch_src: str, shots: list) -> str:
@@ -86,7 +122,7 @@ def prompt_generate_custom_cuda_fewshot_and_template(ref_arch_src: str, shots: l
     - ex_mnist2: fused convolutions and relus
     - ex_tiled_matmul: tiled matrix multiplication
     """
-    prompt = PROBLEM_STATEMENT_CLEANED
+    prompt = PROBLEM_STATEMENT_CUDA_CLEANED
 
     # k = 1
     example_add = read_file(
@@ -148,7 +184,7 @@ Here is an example architecture:\n\n
 ```
 {base}
 ```\n
-{PROBLEM_INSTRUCTION_CLEANED} \n
+{PROBLEM_INSTRUCTION_CUDA_CLEANED} \n
 Here is an optimized verison with custom CUDA kernels: \n
 ```
 {kernel}
@@ -163,7 +199,7 @@ Here is an example architecture:\n\n
 {ref_arch_src}
 ```\n
 """
-    prompt += PROBLEM_INSTRUCTION_CLEANED
+    prompt += PROBLEM_INSTRUCTION_CUDA_CLEANED
     return prompt
 
 def prompt_generate_ex_with_CoT_template(ref_arch_src: str, cot_example: str) -> str:
@@ -176,13 +212,13 @@ def prompt_generate_ex_with_CoT_template(ref_arch_src: str, cot_example: str) ->
     """
 
     # I updated this to allow CoT. Also explicilty state think step by step.
-    PROBLEM_INSTRUCTION_COT = """
+    PROBLEM_INSTRUCTION_CUDA_COT = """
 Optimize the architecture named Model with custom CUDA operators! Name your optimized output architecture ModelNew. Output the new code in codeblocks. Please generate real code, NOT pseudocode, make sure the code compiles and is fully functional. Do not output testing code. 
 In the end, make sure the final code block contains code for output architecture ModelNew with cuda code.\n
 Let's think step by step.\n
 """ 
 
-    prompt = PROBLEM_STATEMENT_CLEANED
+    prompt = PROBLEM_STATEMENT_CUDA_CLEANED
     
     assert cot_example in ["ex_fuse_gelu", "ex_mnist2", "ex_tiled_matmul"]
 
@@ -249,7 +285,7 @@ Here is an example architecture:\n\n
 ```
 {base}
 ```\n
-{PROBLEM_INSTRUCTION_COT} \n
+{PROBLEM_INSTRUCTION_CUDA_COT} \n
 {cot} \n
 ```
 {kernel}
@@ -264,7 +300,7 @@ Here is an example architecture:\n\n
 {ref_arch_src}
 ```\n
 """
-    prompt += PROBLEM_INSTRUCTION_COT
+    prompt += PROBLEM_INSTRUCTION_CUDA_COT
 
     return prompt
 
@@ -303,7 +339,7 @@ def prompt_generate_custom_cuda_from_file_one_example(ref_arch_src, example_ind=
     return prompt_generate_custom_cuda(arch, example_arch, example_new_arch)
 
 
-def prompt_generate_custom_cuda_from_prompt_template(ref_arch_src: str) -> str:
+def prompt_generate_custom_cuda_from_prompt_template(ref_arch_src: str, framework: str = "cuda") -> str:
     """
     Using prompt example (an element-wise addition) for prompt templates
     The most basic form of example just to show LLM the task and the expected output format
@@ -315,9 +351,16 @@ def prompt_generate_custom_cuda_from_prompt_template(ref_arch_src: str) -> str:
     example_arch_path = os.path.join(
         REPO_TOP_PATH, f"src/prompts/model_ex_add.py"
     )
-    example_new_arch_path = os.path.join(
-        REPO_TOP_PATH, f"src/prompts/model_new_ex_add.py"
-    )
+    if framework == "cuda":
+        example_new_arch_path = os.path.join(
+            REPO_TOP_PATH, f"src/prompts/model_new_ex_add.py"
+        )
+    elif framework == "triton":
+        example_new_arch_path = os.path.join(
+            REPO_TOP_PATH, f"src/prompts/model_new_ex_add_triton.py"
+        )
+    else:
+        raise ValueError(f"Framework {framework} not supported please choose from cuda or triton")
 
     if not os.path.exists(example_arch_path):
         raise FileNotFoundError(
@@ -327,15 +370,16 @@ def prompt_generate_custom_cuda_from_prompt_template(ref_arch_src: str) -> str:
         raise FileNotFoundError(
             f"Example new architecture file not found: {example_new_arch_path}"
         )
-
     example_arch = read_file(example_arch_path)
     example_new_arch = read_file(example_new_arch_path)
-
-    return prompt_generate_custom_cuda(arch, example_arch, example_new_arch)
+    if framework == "cuda":
+        return prompt_generate_custom_cuda(arch, example_arch, example_new_arch, PROBLEM_STATEMENT_CUDA)
+    elif framework == "triton":
+        return prompt_generate_custom_triton(arch, example_arch, example_new_arch, PROBLEM_STATEMENT_TRITON)
 
 
 def prompt_fix_compile(ref_arch_src, custom_cuda, metadata):
-    prompt = PROBLEM_STATEMENT
+    prompt = PROBLEM_STATEMENT_CUDA
     prompt += f"""
     With the following architecture:
     ```
@@ -355,7 +399,7 @@ def prompt_fix_compile(ref_arch_src, custom_cuda, metadata):
 
 
 def prompt_fix_correctness(ref_arch_src, custom_cuda, metadata):
-    prompt = PROBLEM_STATEMENT
+    prompt = PROBLEM_STATEMENT_CUDA
     prompt += f"""
     With the following architecture:
     ```

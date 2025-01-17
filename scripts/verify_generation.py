@@ -30,6 +30,8 @@ def inference_with_prompt(arch_path, inference_server: callable = None, log_to_l
     if log_to_local:    
         with open(f"./scratch/prompt.py", "w") as f:
             f.write(custom_cuda_prompt)
+    print(custom_cuda_prompt)
+    exit()
 
     # query LLM
     custom_cuda = inference_server(custom_cuda_prompt)

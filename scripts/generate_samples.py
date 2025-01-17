@@ -75,7 +75,7 @@ class WorkArgs:
     problem_id: int # logically indexed
     sample_id: int
 
-def generate_sample_single(work: WorkArgs, config: GenerationConfig, dataset, inference_server: callable, run_dir: str) -> bool:
+def generate_sample_single(work: WorkArgs, config: GenerationConfig, dataset, inference_server: callable, run_dir: str, framework: str) -> bool:
     # 1. Fetch Problem
     if config.dataset_src == "huggingface":
         curr_problem_row = dataset.filter(lambda x: x["problem_id"] == work.problem_id, desc=None)
@@ -97,14 +97,14 @@ def generate_sample_single(work: WorkArgs, config: GenerationConfig, dataset, in
     
 
     # Construct Prompt   
-    custom_cuda_prompt = prompt_generate_custom_cuda_from_prompt_template(ref_arch_src)
+    custom_kernel_prompt = prompt_generate_custom_cuda_from_prompt_template(ref_arch_src, framework)
     if config.log_prompt:
         prompt_path = os.path.join(run_dir, f"level_{config.level}_problem_{work.problem_id}_sample_{work.sample_id}_prompt.txt")
         with open(prompt_path, "w") as f:
-            f.write(custom_cuda_prompt)
+            f.write(custom_kernel_prompt)
 
     # Query server with constructed prompt
-    custom_cuda = inference_server(custom_cuda_prompt)
+    custom_cuda = inference_server(custom_kernel_prompt)
     custom_cuda = extract_first_code(custom_cuda, ["python", "cpp"])
     # check LLM is able to generate custom CUDA code
     assert custom_cuda is not None, "Custom CUDA code generation failed"
@@ -120,9 +120,9 @@ def generate_sample_single(work: WorkArgs, config: GenerationConfig, dataset, in
     return True
     
 
-def generate_sample_launcher(work: WorkArgs, config: GenerationConfig, dataset, inference_server: callable, run_dir: str):
+def generate_sample_launcher(work: WorkArgs, config: GenerationConfig, dataset, inference_server: callable, run_dir: str, framework: str):
     try:
-        return generate_sample_single(work, config, dataset, inference_server, run_dir)
+        return generate_sample_single(work, config, dataset, inference_server, run_dir, framework)
     except Exception as e:
         print(f"Error generating sample {work.problem_id} {work.sample_id}: {e}")
         return None
@@ -150,6 +150,9 @@ def main(config: GenerationConfig):
         curr_level_dataset = dataset[f"level_{config.level}"]
     elif config.dataset_src == "local":
         curr_level_dataset = construct_kernelbench_dataset(config.level)
+
+    # Framework Configurations
+    assert config.framework in ["cuda", "triton"], f"Framework {config.framework} not supported"
 
 
     num_problems_in_level = len(curr_level_dataset)
@@ -198,7 +201,8 @@ def main(config: GenerationConfig):
                       config=config, 
                       dataset=curr_level_dataset, 
                       inference_server=inference_server,
-                      run_dir=run_dir
+                      run_dir=run_dir,
+                      framework=config.framewordk
                       )
     
     num_generated_samples = len(generation_results)
@@ -209,4 +213,3 @@ def main(config: GenerationConfig):
 
 if __name__ == "__main__":
     main()
-
