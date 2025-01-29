@@ -1,115 +1,84 @@
-Starting Batch Generation with config: EvalConfig({'dataset_src': 'huggingface', 'dataset_name': 'ScalingIntelligence/KernelBench', 'level': 1, 'subset': [None, None], 'run_name': 'test_hf_level_1', 'num_workers': 1, 'api_query_interval': 0.0, 'server_type': 'deepseek', 'model_name': 'deepseek-coder', 'max_tokens': 4096, 'temperature': 0, 'runs_dir': '/Users/sahanp/repos/KernelBench/runs', 'verbose': False, 'store_type': 'local', 'log_prompt': False})
-Generating on 1 sample each for level 1 problems: range(1, 100)
-custom_cuda_prompt: You write custom CUDA kernels to replace the pytorch operators in the given architecture to get speedups. 
+Starting Batch Eval with config: EvalConfig({'run_name': 'test_hf_level_1', 'dataset_src': 'local', 'dataset_name': 'ScalingIntelligence/KernelBench', 'level': 1, 'subset': [None, None], 'eval_mode': 'local', 'gpu_arch': ['Ada'], 'framework': 'triton', 'runs_dir': '/home/sahanp/repos/KernelBench/runs', 'kernel_eval_build_dir': '/home/sahanp/repos/KernelBench/cache', 'verbose': False, 'num_correct_trials': 5, 'num_perf_trials': 100, 'timeout': 300, 'measure_performance': True, 'num_gpu_devices': 1})
+Evaluating 1 sample each for level 1 problems: range(1, 100)
+Start evaluation on 100 unevaluated samples in range: range(1, 100)
+[Curr Batch] 1 tasks over 1 GPUs; [Total Work left] 99
+we are loading custom model
+we were able to compile the custom model
+context: {'__builtins__': {'__name__': 'builtins', '__doc__': "Built-in functions, types, exceptions, and other objects.\n\nThis module provides direct access to all 'built-in'\nidentifiers of Python; for example, builtins.len is\nthe full name for the built-in function len().\n\nThis module is not normally accessed explicitly by most\napplications, but can be useful in modules that provide\nobjects with the same name as a built-in value, but in\nwhich the built-in of that name is also needed.", '__package__': '', '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': ModuleSpec(name='builtins', loader=<class '_frozen_importlib.BuiltinImporter'>, origin='built-in'), '__build_class__': <built-in function __build_class__>, '__import__': <built-in function __import__>, 'abs': <built-in function abs>, 'all': <built-in function all>, 'any': <built-in function any>, 'ascii': <built-in function ascii>, 'bin': <built-in function bin>, 'breakpoint': <built-in function breakpoint>, 'callable': <built-in function callable>, 'chr': <built-in function chr>, 'compile': <built-in function compile>, 'delattr': <built-in function delattr>, 'dir': <built-in function dir>, 'divmod': <built-in function divmod>, 'eval': <built-in function eval>, 'exec': <built-in function exec>, 'format': <built-in function format>, 'getattr': <built-in function getattr>, 'globals': <built-in function globals>, 'hasattr': <built-in function hasattr>, 'hash': <built-in function hash>, 'hex': <built-in function hex>, 'id': <built-in function id>, 'input': <built-in function input>, 'isinstance': <built-in function isinstance>, 'issubclass': <built-in function issubclass>, 'iter': <built-in function iter>, 'aiter': <built-in function aiter>, 'len': <built-in function len>, 'locals': <built-in function locals>, 'max': <built-in function max>, 'min': <built-in function min>, 'next': <built-in function next>, 'anext': <built-in function anext>, 'oct': <built-in function oct>, 'ord': <built-in function ord>, 'pow': <built-in function pow>, 'print': <built-in function print>, 'repr': <built-in function repr>, 'round': <built-in function round>, 'setattr': <built-in function setattr>, 'sorted': <built-in function sorted>, 'sum': <built-in function sum>, 'vars': <built-in function vars>, 'None': None, 'Ellipsis': Ellipsis, 'NotImplemented': NotImplemented, 'False': False, 'True': True, 'bool': <class 'bool'>, 'memoryview': <class 'memoryview'>, 'bytearray': <class 'bytearray'>, 'bytes': <class 'bytes'>, 'classmethod': <class 'classmethod'>, 'complex': <class 'complex'>, 'dict': <class 'dict'>, 'enumerate': <class 'enumerate'>, 'filter': <class 'filter'>, 'float': <class 'float'>, 'frozenset': <class 'frozenset'>, 'property': <class 'property'>, 'int': <class 'int'>, 'list': <class 'list'>, 'map': <class 'map'>, 'object': <class 'object'>, 'range': <class 'range'>, 'reversed': <class 'reversed'>, 'set': <class 'set'>, 'slice': <class 'slice'>, 'staticmethod': <class 'staticmethod'>, 'str': <class 'str'>, 'super': <class 'super'>, 'tuple': <class 'tuple'>, 'type': <class 'type'>, 'zip': <class 'zip'>, '__debug__': True, 'BaseException': <class 'BaseException'>, 'BaseExceptionGroup': <class 'BaseExceptionGroup'>, 'Exception': <class 'Exception'>, 'GeneratorExit': <class 'GeneratorExit'>, 'KeyboardInterrupt': <class 'KeyboardInterrupt'>, 'SystemExit': <class 'SystemExit'>, 'ArithmeticError': <class 'ArithmeticError'>, 'AssertionError': <class 'AssertionError'>, 'AttributeError': <class 'AttributeError'>, 'BufferError': <class 'BufferError'>, 'EOFError': <class 'EOFError'>, 'ImportError': <class 'ImportError'>, 'LookupError': <class 'LookupError'>, 'MemoryError': <class 'MemoryError'>, 'NameError': <class 'NameError'>, 'OSError': <class 'OSError'>, 'ReferenceError': <class 'ReferenceError'>, 'RuntimeError': <class 'RuntimeError'>, 'StopAsyncIteration': <class 'StopAsyncIteration'>, 'StopIteration': <class 'StopIteration'>, 'SyntaxError': <class 'SyntaxError'>, 'SystemError': <class 'SystemError'>, 'TypeError': <class 'TypeError'>, 'ValueError': <class 'ValueError'>, 'Warning': <class 'Warning'>, 'FloatingPointError': <class 'FloatingPointError'>, 'OverflowError': <class 'OverflowError'>, 'ZeroDivisionError': <class 'ZeroDivisionError'>, 'BytesWarning': <class 'BytesWarning'>, 'DeprecationWarning': <class 'DeprecationWarning'>, 'EncodingWarning': <class 'EncodingWarning'>, 'FutureWarning': <class 'FutureWarning'>, 'ImportWarning': <class 'ImportWarning'>, 'PendingDeprecationWarning': <class 'PendingDeprecationWarning'>, 'ResourceWarning': <class 'ResourceWarning'>, 'RuntimeWarning': <class 'RuntimeWarning'>, 'SyntaxWarning': <class 'SyntaxWarning'>, 'UnicodeWarning': <class 'UnicodeWarning'>, 'UserWarning': <class 'UserWarning'>, 'BlockingIOError': <class 'BlockingIOError'>, 'ChildProcessError': <class 'ChildProcessError'>, 'ConnectionError': <class 'ConnectionError'>, 'FileExistsError': <class 'FileExistsError'>, 'FileNotFoundError': <class 'FileNotFoundError'>, 'InterruptedError': <class 'InterruptedError'>, 'IsADirectoryError': <class 'IsADirectoryError'>, 'NotADirectoryError': <class 'NotADirectoryError'>, 'PermissionError': <class 'PermissionError'>, 'ProcessLookupError': <class 'ProcessLookupError'>, 'TimeoutError': <class 'TimeoutError'>, 'IndentationError': <class 'IndentationError'>, 'IndexError': <class 'IndexError'>, 'KeyError': <class 'KeyError'>, 'ModuleNotFoundError': <class 'ModuleNotFoundError'>, 'NotImplementedError': <class 'NotImplementedError'>, 'RecursionError': <class 'RecursionError'>, 'UnboundLocalError': <class 'UnboundLocalError'>, 'UnicodeError': <class 'UnicodeError'>, 'BrokenPipeError': <class 'BrokenPipeError'>, 'ConnectionAbortedError': <class 'ConnectionAbortedError'>, 'ConnectionRefusedError': <class 'ConnectionRefusedError'>, 'ConnectionResetError': <class 'ConnectionResetError'>, 'TabError': <class 'TabError'>, 'UnicodeDecodeError': <class 'UnicodeDecodeError'>, 'UnicodeEncodeError': <class 'UnicodeEncodeError'>, 'UnicodeTranslateError': <class 'UnicodeTranslateError'>, 'ExceptionGroup': <class 'ExceptionGroup'>, 'EnvironmentError': <class 'OSError'>, 'IOError': <class 'OSError'>, 'open': <built-in function open>, 'quit': Use quit() or Ctrl-D (i.e. EOF) to exit, 'exit': Use exit() or Ctrl-D (i.e. EOF) to exit, 'copyright': Copyright (c) 2001-2023 Python Software Foundation.
+All Rights Reserved.
 
-    You have complete freedom to choose the set of operators you want to replace. You may make the decision to replace some operators with custom CUDA kernels and leave others unchanged. You may replace multiple operators with custom implementations, consider operator fusion opportunities (combining multiple operators into a single kernel, for example, combining matmul+relu), or algorithmic changes (such as online softmax). You are only limited by your imagination.
+Copyright (c) 2000 BeOpen.com.
+All Rights Reserved.
 
+Copyright (c) 1995-2001 Corporation for National Research Initiatives.
+All Rights Reserved.
 
-        Here's an example to show you the syntax of inline embedding custom CUDA operators in torch: The example given architecture is: 
-
-        ``` 
-
-        import torch
+Copyright (c) 1991-1995 Stichting Mathematisch Centrum, Amsterdam.
+All Rights Reserved., 'credits':     Thanks to CWI, CNRI, BeOpen, Zope Corporation, the Python Software
+    Foundation, and a cast of thousands for supporting Python
+    development.  See www.python.org for more information., 'license': Type license() to see the full license text, 'help': Type help() for interactive help, or help(object) for help about object.}, 'torch': <module 'torch' from '/home/sahanp/.conda/envs/triton-test3/lib/python3.12/site-packages/torch/__init__.py'>, 'nn': <module 'torch.nn' from '/home/sahanp/.conda/envs/triton-test3/lib/python3.12/site-packages/torch/nn/__init__.py'>, 'Model': <class 'Model'>, 'N': 2048, 'get_inputs': <function get_inputs at 0x7fae11f132e0>, 'get_init_inputs': <function get_init_inputs at 0x7fae11f134c0>, 'BUILD_DIRECTORY': '/home/sahanp/repos/KernelBench/cache/test_hf_level_1/1/0'}
+build_directory: /home/sahanp/repos/KernelBench/cache/test_hf_level_1/1/0
+model_custom_src: import os
+os.environ['TORCH_EXTENSIONS_DIR'] = '/home/sahanp/repos/KernelBench/cache/test_hf_level_1/1/0'
+import torch
 import torch.nn as nn
-import torch.nn.functional as F
+import triton
+import triton.language as tl
 
+@triton.jit
+def matmul_kernel(
+    A_ptr, B_ptr, C_ptr,  # Pointers to matrices A, B, and C
+    N: tl.constexpr,      # Size of the square matrices
+    BLOCK_SIZE: tl.constexpr  # Block size for tiling
+):
+    # Compute the row and column indices for the current thread
+    row = tl.program_id(0)
+    col = tl.program_id(1)
 
-class Model(nn.Module):
-    def __init__(self) -> None:
-        super().__init__()
+    # Initialize the accumulator
+    acc = tl.zeros((BLOCK_SIZE, BLOCK_SIZE), dtype=tl.float32)
 
-    def forward(self, a, b):
-        return a + b
+    # Loop over the tiles of the matrices
+    for k in range(0, N, BLOCK_SIZE):
+        # Load a tile of A and B
+        A_tile = tl.load(A_ptr + (row * N + k) + tl.arange(0, BLOCK_SIZE)[:, None], mask=(k + tl.arange(0, BLOCK_SIZE)) < N, other=0.0)
+        B_tile = tl.load(B_ptr + (k * N + col) + tl.arange(0, BLOCK_SIZE)[None, :], mask=(k + tl.arange(0, BLOCK_SIZE)) < N, other=0.0)
 
+        # Perform the matrix multiplication on the tiles
+        acc += tl.dot(A_tile, B_tile)
 
-def get_inputs():
-    # randomly generate input tensors based on the model architecture
-    a = torch.randn(1, 128).cuda()
-    b = torch.randn(1, 128).cuda()
-    return [a, b]
+    # Store the result in C
+    tl.store(C_ptr + (row * N + col) + tl.arange(0, BLOCK_SIZE)[:, None] + tl.arange(0, BLOCK_SIZE)[None, :], acc, mask=(row + tl.arange(0, BLOCK_SIZE)) < N and (col + tl.arange(0, BLOCK_SIZE)) < N)
 
+def triton_matmul(A: torch.Tensor, B: torch.Tensor):
+    """
+    This function wraps the Triton kernel call for matrix multiplication.
+    """
+    assert A.is_cuda and B.is_cuda, "Tensors must be on CUDA."
+    assert A.shape == B.shape, "Matrices must be square and of the same size."
 
-def get_init_inputs():
-    # randomly generate tensors required for initialization based on the model architecture
-    return []
+    N = A.size(0)
+    C = torch.empty_like(A)
 
-        ``` 
+    BLOCK_SIZE = 32  # Tunable parameter for block size
 
-        The example new arch with custom CUDA kernels looks like this: 
-        ```
-        import torch
-import torch.nn as nn
-import torch.nn.functional as F
-from torch.utils.cpp_extension import load_inline
+    # Determine the grid size
+    grid = lambda meta: ((N + meta['BLOCK_SIZE'] - 1) // meta['BLOCK_SIZE'], (N + meta['BLOCK_SIZE'] - 1) // meta['BLOCK_SIZE'])
 
-# Define the custom CUDA kernel for element-wise addition
-elementwise_add_source = """
-#include <torch/extension.h>
-#include <cuda_runtime.h>
-
-__global__ void elementwise_add_kernel(const float* a, const float* b, float* out, int size) {
-    int idx = blockIdx.x * blockDim.x + threadIdx.x;
-    if (idx < size) {
-        out[idx] = a[idx] + b[idx];
-    }
-}
-
-torch::Tensor elementwise_add_cuda(torch::Tensor a, torch::Tensor b) {
-    auto size = a.numel();
-    auto out = torch::zeros_like(a);
-
-    const int block_size = 256;
-    const int num_blocks = (size + block_size - 1) / block_size;
-
-    elementwise_add_kernel<<<num_blocks, block_size>>>(a.data_ptr<float>(), b.data_ptr<float>(), out.data_ptr<float>(), size);
-
-    return out;
-}
-"""
-
-elementwise_add_cpp_source = (
-    "torch::Tensor elementwise_add_cuda(torch::Tensor a, torch::Tensor b);"
-)
-
-# Compile the inline CUDA code for element-wise addition
-elementwise_add = load_inline(
-    name="elementwise_add",
-    cpp_sources=elementwise_add_cpp_source,
-    cuda_sources=elementwise_add_source,
-    functions=["elementwise_add_cuda"],
-    verbose=True,
-    extra_cflags=[""],
-    extra_ldflags=[""],
-)
-
+    # Launch the Triton kernel
+    matmul_kernel[grid](
+        A, B, C, N,
+        BLOCK_SIZE=BLOCK_SIZE
+    )
+    return C
 
 class ModelNew(nn.Module):
-    def __init__(self) -> None:
-        super().__init__()
-        self.elementwise_add = elementwise_add
-
-    def forward(self, a, b):
-        return self.elementwise_add.elementwise_add_cuda(a, b)
-
-        ``` 
-
-        
-    You are given the following architecture: 
-
-    ```
-    import torch
-import torch.nn as nn
-
-class Model(nn.Module):
-    """
-    Simple model that performs a single square matrix multiplication (C = A * B)
-    """
     def __init__(self):
-        super(Model, self).__init__()
-    
+        super(ModelNew, self).__init__()
+
     def forward(self, A: torch.Tensor, B: torch.Tensor) -> torch.Tensor:
         """
-        Performs the matrix multiplication.
+        Performs the matrix multiplication using Triton.
 
         Args:
             A (torch.Tensor): Input matrix A of shape (N, N).
@@ -118,19 +87,788 @@ class Model(nn.Module):
         Returns:
             torch.Tensor: Output matrix C of shape (N, N).
         """
-        return torch.matmul(A, B)
+        return triton_matmul(A, B)
+Failed to compile custom CUDA kernel: Record as compilation failure.
+Error: could not get source code
+--------------------------------------------------------------------------------------------------------------------------------
+[Eval Result] Problem ID: 1, Sample ID: 0
+compiled=False correctness=False metadata={'hardware': 'NVIDIA H100', 'device': 'cuda:0', 'compilation_error': OSError('could not get source code')} runtime=-1.0 runtime_stats={}
+Adding Eval Result to file for problem 1 sample 0
+[WARNING] Metadata is not JSON serializable, error: Object of type OSError is not JSON serializable
+[WARNING] Metadata now converted to be JSON serializable: {'hardware': 'NVIDIA H100', 'device': 'cuda:0', 'compilation_error': 'could not get source code'}
+--------------------------------------------------------------------------------------------------------------------------------
+[Curr batch] Evaluation took 3.35 seconds
+[Curr Batch] 1 tasks over 1 GPUs; [Total Work left] 98
+we are loading custom model
+we were able to compile the custom model
+context: {'__builtins__': {'__name__': 'builtins', '__doc__': "Built-in functions, types, exceptions, and other objects.\n\nThis module provides direct access to all 'built-in'\nidentifiers of Python; for example, builtins.len is\nthe full name for the built-in function len().\n\nThis module is not normally accessed explicitly by most\napplications, but can be useful in modules that provide\nobjects with the same name as a built-in value, but in\nwhich the built-in of that name is also needed.", '__package__': '', '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': ModuleSpec(name='builtins', loader=<class '_frozen_importlib.BuiltinImporter'>, origin='built-in'), '__build_class__': <built-in function __build_class__>, '__import__': <built-in function __import__>, 'abs': <built-in function abs>, 'all': <built-in function all>, 'any': <built-in function any>, 'ascii': <built-in function ascii>, 'bin': <built-in function bin>, 'breakpoint': <built-in function breakpoint>, 'callable': <built-in function callable>, 'chr': <built-in function chr>, 'compile': <built-in function compile>, 'delattr': <built-in function delattr>, 'dir': <built-in function dir>, 'divmod': <built-in function divmod>, 'eval': <built-in function eval>, 'exec': <built-in function exec>, 'format': <built-in function format>, 'getattr': <built-in function getattr>, 'globals': <built-in function globals>, 'hasattr': <built-in function hasattr>, 'hash': <built-in function hash>, 'hex': <built-in function hex>, 'id': <built-in function id>, 'input': <built-in function input>, 'isinstance': <built-in function isinstance>, 'issubclass': <built-in function issubclass>, 'iter': <built-in function iter>, 'aiter': <built-in function aiter>, 'len': <built-in function len>, 'locals': <built-in function locals>, 'max': <built-in function max>, 'min': <built-in function min>, 'next': <built-in function next>, 'anext': <built-in function anext>, 'oct': <built-in function oct>, 'ord': <built-in function ord>, 'pow': <built-in function pow>, 'print': <built-in function print>, 'repr': <built-in function repr>, 'round': <built-in function round>, 'setattr': <built-in function setattr>, 'sorted': <built-in function sorted>, 'sum': <built-in function sum>, 'vars': <built-in function vars>, 'None': None, 'Ellipsis': Ellipsis, 'NotImplemented': NotImplemented, 'False': False, 'True': True, 'bool': <class 'bool'>, 'memoryview': <class 'memoryview'>, 'bytearray': <class 'bytearray'>, 'bytes': <class 'bytes'>, 'classmethod': <class 'classmethod'>, 'complex': <class 'complex'>, 'dict': <class 'dict'>, 'enumerate': <class 'enumerate'>, 'filter': <class 'filter'>, 'float': <class 'float'>, 'frozenset': <class 'frozenset'>, 'property': <class 'property'>, 'int': <class 'int'>, 'list': <class 'list'>, 'map': <class 'map'>, 'object': <class 'object'>, 'range': <class 'range'>, 'reversed': <class 'reversed'>, 'set': <class 'set'>, 'slice': <class 'slice'>, 'staticmethod': <class 'staticmethod'>, 'str': <class 'str'>, 'super': <class 'super'>, 'tuple': <class 'tuple'>, 'type': <class 'type'>, 'zip': <class 'zip'>, '__debug__': True, 'BaseException': <class 'BaseException'>, 'BaseExceptionGroup': <class 'BaseExceptionGroup'>, 'Exception': <class 'Exception'>, 'GeneratorExit': <class 'GeneratorExit'>, 'KeyboardInterrupt': <class 'KeyboardInterrupt'>, 'SystemExit': <class 'SystemExit'>, 'ArithmeticError': <class 'ArithmeticError'>, 'AssertionError': <class 'AssertionError'>, 'AttributeError': <class 'AttributeError'>, 'BufferError': <class 'BufferError'>, 'EOFError': <class 'EOFError'>, 'ImportError': <class 'ImportError'>, 'LookupError': <class 'LookupError'>, 'MemoryError': <class 'MemoryError'>, 'NameError': <class 'NameError'>, 'OSError': <class 'OSError'>, 'ReferenceError': <class 'ReferenceError'>, 'RuntimeError': <class 'RuntimeError'>, 'StopAsyncIteration': <class 'StopAsyncIteration'>, 'StopIteration': <class 'StopIteration'>, 'SyntaxError': <class 'SyntaxError'>, 'SystemError': <class 'SystemError'>, 'TypeError': <class 'TypeError'>, 'ValueError': <class 'ValueError'>, 'Warning': <class 'Warning'>, 'FloatingPointError': <class 'FloatingPointError'>, 'OverflowError': <class 'OverflowError'>, 'ZeroDivisionError': <class 'ZeroDivisionError'>, 'BytesWarning': <class 'BytesWarning'>, 'DeprecationWarning': <class 'DeprecationWarning'>, 'EncodingWarning': <class 'EncodingWarning'>, 'FutureWarning': <class 'FutureWarning'>, 'ImportWarning': <class 'ImportWarning'>, 'PendingDeprecationWarning': <class 'PendingDeprecationWarning'>, 'ResourceWarning': <class 'ResourceWarning'>, 'RuntimeWarning': <class 'RuntimeWarning'>, 'SyntaxWarning': <class 'SyntaxWarning'>, 'UnicodeWarning': <class 'UnicodeWarning'>, 'UserWarning': <class 'UserWarning'>, 'BlockingIOError': <class 'BlockingIOError'>, 'ChildProcessError': <class 'ChildProcessError'>, 'ConnectionError': <class 'ConnectionError'>, 'FileExistsError': <class 'FileExistsError'>, 'FileNotFoundError': <class 'FileNotFoundError'>, 'InterruptedError': <class 'InterruptedError'>, 'IsADirectoryError': <class 'IsADirectoryError'>, 'NotADirectoryError': <class 'NotADirectoryError'>, 'PermissionError': <class 'PermissionError'>, 'ProcessLookupError': <class 'ProcessLookupError'>, 'TimeoutError': <class 'TimeoutError'>, 'IndentationError': <class 'IndentationError'>, 'IndexError': <class 'IndexError'>, 'KeyError': <class 'KeyError'>, 'ModuleNotFoundError': <class 'ModuleNotFoundError'>, 'NotImplementedError': <class 'NotImplementedError'>, 'RecursionError': <class 'RecursionError'>, 'UnboundLocalError': <class 'UnboundLocalError'>, 'UnicodeError': <class 'UnicodeError'>, 'BrokenPipeError': <class 'BrokenPipeError'>, 'ConnectionAbortedError': <class 'ConnectionAbortedError'>, 'ConnectionRefusedError': <class 'ConnectionRefusedError'>, 'ConnectionResetError': <class 'ConnectionResetError'>, 'TabError': <class 'TabError'>, 'UnicodeDecodeError': <class 'UnicodeDecodeError'>, 'UnicodeEncodeError': <class 'UnicodeEncodeError'>, 'UnicodeTranslateError': <class 'UnicodeTranslateError'>, 'ExceptionGroup': <class 'ExceptionGroup'>, 'EnvironmentError': <class 'OSError'>, 'IOError': <class 'OSError'>, 'open': <built-in function open>, 'quit': Use quit() or Ctrl-D (i.e. EOF) to exit, 'exit': Use exit() or Ctrl-D (i.e. EOF) to exit, 'copyright': Copyright (c) 2001-2023 Python Software Foundation.
+All Rights Reserved.
 
-N = 2048
+Copyright (c) 2000 BeOpen.com.
+All Rights Reserved.
 
-def get_inputs():
-    A = torch.randn(N, N)
-    B = torch.randn(N, N)
-    return [A, B]
+Copyright (c) 1995-2001 Corporation for National Research Initiatives.
+All Rights Reserved.
 
-def get_init_inputs():
-    return []  # No special initialization inputs needed
-    ```
-    
-Optimize the architecture named Model with custom CUDA operators! Name your optimized output architecture ModelNew. Output the new code in codeblocks. Please generate real code, NOT pseudocode, make sure the code compiles and is fully functional. Just output the new model code, no other text, and NO testing code! 
+Copyright (c) 1991-1995 Stichting Mathematisch Centrum, Amsterdam.
+All Rights Reserved., 'credits':     Thanks to CWI, CNRI, BeOpen, Zope Corporation, the Python Software
+    Foundation, and a cast of thousands for supporting Python
+    development.  See www.python.org for more information., 'license': Type license() to see the full license text, 'help': Type help() for interactive help, or help(object) for help about object.}, 'torch': <module 'torch' from '/home/sahanp/.conda/envs/triton-test3/lib/python3.12/site-packages/torch/__init__.py'>, 'nn': <module 'torch.nn' from '/home/sahanp/.conda/envs/triton-test3/lib/python3.12/site-packages/torch/nn/__init__.py'>, 'Model': <class 'Model'>, 'M': 1024, 'K': 4096, 'N': 2048, 'get_inputs': <function get_inputs at 0x7f92238372e0>, 'get_init_inputs': <function get_init_inputs at 0x7f92238374c0>, 'BUILD_DIRECTORY': '/home/sahanp/repos/KernelBench/cache/test_hf_level_1/2/0'}
+build_directory: /home/sahanp/repos/KernelBench/cache/test_hf_level_1/2/0
+model_custom_src: import os
+os.environ['TORCH_EXTENSIONS_DIR'] = '/home/sahanp/repos/KernelBench/cache/test_hf_level_1/2/0'
+import torch
+import torch.nn as nn
+import triton
+import triton.language as tl
 
+@triton.jit
+def matmul_kernel(
+    A_ptr,         # Pointer to first input matrix A
+    B_ptr,         # Pointer to second input matrix B
+    C_ptr,         # Pointer to output matrix C
+    M, N, K,       # Dimensions of the matrices
+    stride_am, stride_ak,  # Strides for matrix A
+    stride_bk, stride_bn,  # Strides for matrix B
+    stride_cm, stride_cn,  # Strides for matrix C
+    BLOCK_SIZE_M: tl.constexpr, BLOCK_SIZE_N: tl.constexpr, BLOCK_SIZE_K: tl.constexpr,
+):
+    # Program ID for the current block
+    pid = tl.program_id(axis=0)
+    num_pid_m = tl.cdiv(M, BLOCK_SIZE_M)
+    num_pid_n = tl.cdiv(N, BLOCK_SIZE_N)
+    pid_m = pid // num_pid_n
+    pid_n = pid % num_pid_n
 
+    # Offsets for the current block
+    offs_am = (pid_m * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)) % M
+    offs_bn = (pid_n * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)) % N
+    offs_k = tl.arange(0, BLOCK_SIZE_K)
+
+    # Pointers to the current block in A and B
+    A_ptrs = A_ptr + offs_am[:, None] * stride_am + offs_k[None, :] * stride_ak
+    B_ptrs = B_ptr + offs_k[:, None] * stride_bk + offs_bn[None, :] * stride_bn
+
+    # Accumulator for the current block
+    acc = tl.zeros((BLOCK_SIZE_M, BLOCK_SIZE_N), dtype=tl.float32)
+
+    # Loop over K dimension
+    for k in range(0, K, BLOCK_SIZE_K):
+        a = tl.load(A_ptrs, mask=offs_k[None, :] < K - k, other=0.0)
+        b = tl.load(B_ptrs, mask=offs_k[:, None] < K - k, other=0.0)
+        acc += tl.dot(a, b)
+        A_ptrs += BLOCK_SIZE_K * stride_ak
+        B_ptrs += BLOCK_SIZE_K * stride_bk
+
+    # Store the result in C
+    offs_cm = pid_m * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)
+    offs_cn = pid_n * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)
+    C_ptrs = C_ptr + offs_cm[:, None] * stride_cm + offs_cn[None, :] * stride_cn
+    tl.store(C_ptrs, acc, mask=(offs_cm[:, None] < M) & (offs_cn[None, :] < N))
+
+def triton_matmul(A: torch.Tensor, B: torch.Tensor):
+    """
+    This function wraps the Triton kernel call for matrix multiplication.
+    """
+    assert A.is_cuda and B.is_cuda, "Tensors must be on CUDA."
+    A = A.contiguous()
+    B = B.contiguous()
+
+    M, K = A.shape
+    K, N = B.shape
+    C = torch.empty((M, N), device=A.device, dtype=A.dtype)
+
+    BLOCK_SIZE_M = 64
+    BLOCK_SIZE_N = 64
+    BLOCK_SIZE_K = 32
+
+    grid = lambda meta: ((M + meta['BLOCK_SIZE_M'] - 1) // meta['BLOCK_SIZE_M']) * ((N + meta['BLOCK_SIZE_N'] - 1) // meta['BLOCK_SIZE_N']),
+
+    matmul_kernel[grid](
+        A, B, C, M, N, K,
+        A.stride(0), A.stride(1),
+        B.stride(0), B.stride(1),
+        C.stride(0), C.stride(1),
+        BLOCK_SIZE_M=BLOCK_SIZE_M, BLOCK_SIZE_N=BLOCK_SIZE_N, BLOCK_SIZE_K=BLOCK_SIZE_K
+    )
+    return C
+
+class ModelNew(nn.Module):
+    def __init__(self):
+        super(ModelNew, self).__init__()
+
+    def forward(self, A: torch.Tensor, B: torch.Tensor) -> torch.Tensor:
+        """
+        Performs matrix multiplication using Triton kernel.
+
+        Args:
+            A: Input tensor of shape (M, K).
+            B: Input tensor of shape (K, N).
+
+        Returns:
+            Output tensor of shape (M, N).
+        """
+        return triton_matmul(A, B)
+Failed to compile custom CUDA kernel: Record as compilation failure.
+Error: could not get source code
+--------------------------------------------------------------------------------------------------------------------------------
+[Eval Result] Problem ID: 2, Sample ID: 0
+compiled=False correctness=False metadata={'hardware': 'NVIDIA H100', 'device': 'cuda:0', 'compilation_error': OSError('could not get source code')} runtime=-1.0 runtime_stats={}
+Adding Eval Result to file for problem 2 sample 0
+[WARNING] Metadata is not JSON serializable, error: Object of type OSError is not JSON serializable
+[WARNING] Metadata now converted to be JSON serializable: {'hardware': 'NVIDIA H100', 'device': 'cuda:0', 'compilation_error': 'could not get source code'}
+--------------------------------------------------------------------------------------------------------------------------------
+[Curr batch] Evaluation took 3.37 seconds
+[Curr Batch] 1 tasks over 1 GPUs; [Total Work left] 97
+we are loading custom model
+we were able to compile the custom model
+context: {'__builtins__': {'__name__': 'builtins', '__doc__': "Built-in functions, types, exceptions, and other objects.\n\nThis module provides direct access to all 'built-in'\nidentifiers of Python; for example, builtins.len is\nthe full name for the built-in function len().\n\nThis module is not normally accessed explicitly by most\napplications, but can be useful in modules that provide\nobjects with the same name as a built-in value, but in\nwhich the built-in of that name is also needed.", '__package__': '', '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': ModuleSpec(name='builtins', loader=<class '_frozen_importlib.BuiltinImporter'>, origin='built-in'), '__build_class__': <built-in function __build_class__>, '__import__': <built-in function __import__>, 'abs': <built-in function abs>, 'all': <built-in function all>, 'any': <built-in function any>, 'ascii': <built-in function ascii>, 'bin': <built-in function bin>, 'breakpoint': <built-in function breakpoint>, 'callable': <built-in function callable>, 'chr': <built-in function chr>, 'compile': <built-in function compile>, 'delattr': <built-in function delattr>, 'dir': <built-in function dir>, 'divmod': <built-in function divmod>, 'eval': <built-in function eval>, 'exec': <built-in function exec>, 'format': <built-in function format>, 'getattr': <built-in function getattr>, 'globals': <built-in function globals>, 'hasattr': <built-in function hasattr>, 'hash': <built-in function hash>, 'hex': <built-in function hex>, 'id': <built-in function id>, 'input': <built-in function input>, 'isinstance': <built-in function isinstance>, 'issubclass': <built-in function issubclass>, 'iter': <built-in function iter>, 'aiter': <built-in function aiter>, 'len': <built-in function len>, 'locals': <built-in function locals>, 'max': <built-in function max>, 'min': <built-in function min>, 'next': <built-in function next>, 'anext': <built-in function anext>, 'oct': <built-in function oct>, 'ord': <built-in function ord>, 'pow': <built-in function pow>, 'print': <built-in function print>, 'repr': <built-in function repr>, 'round': <built-in function round>, 'setattr': <built-in function setattr>, 'sorted': <built-in function sorted>, 'sum': <built-in function sum>, 'vars': <built-in function vars>, 'None': None, 'Ellipsis': Ellipsis, 'NotImplemented': NotImplemented, 'False': False, 'True': True, 'bool': <class 'bool'>, 'memoryview': <class 'memoryview'>, 'bytearray': <class 'bytearray'>, 'bytes': <class 'bytes'>, 'classmethod': <class 'classmethod'>, 'complex': <class 'complex'>, 'dict': <class 'dict'>, 'enumerate': <class 'enumerate'>, 'filter': <class 'filter'>, 'float': <class 'float'>, 'frozenset': <class 'frozenset'>, 'property': <class 'property'>, 'int': <class 'int'>, 'list': <class 'list'>, 'map': <class 'map'>, 'object': <class 'object'>, 'range': <class 'range'>, 'reversed': <class 'reversed'>, 'set': <class 'set'>, 'slice': <class 'slice'>, 'staticmethod': <class 'staticmethod'>, 'str': <class 'str'>, 'super': <class 'super'>, 'tuple': <class 'tuple'>, 'type': <class 'type'>, 'zip': <class 'zip'>, '__debug__': True, 'BaseException': <class 'BaseException'>, 'BaseExceptionGroup': <class 'BaseExceptionGroup'>, 'Exception': <class 'Exception'>, 'GeneratorExit': <class 'GeneratorExit'>, 'KeyboardInterrupt': <class 'KeyboardInterrupt'>, 'SystemExit': <class 'SystemExit'>, 'ArithmeticError': <class 'ArithmeticError'>, 'AssertionError': <class 'AssertionError'>, 'AttributeError': <class 'AttributeError'>, 'BufferError': <class 'BufferError'>, 'EOFError': <class 'EOFError'>, 'ImportError': <class 'ImportError'>, 'LookupError': <class 'LookupError'>, 'MemoryError': <class 'MemoryError'>, 'NameError': <class 'NameError'>, 'OSError': <class 'OSError'>, 'ReferenceError': <class 'ReferenceError'>, 'RuntimeError': <class 'RuntimeError'>, 'StopAsyncIteration': <class 'StopAsyncIteration'>, 'StopIteration': <class 'StopIteration'>, 'SyntaxError': <class 'SyntaxError'>, 'SystemError': <class 'SystemError'>, 'TypeError': <class 'TypeError'>, 'ValueError': <class 'ValueError'>, 'Warning': <class 'Warning'>, 'FloatingPointError': <class 'FloatingPointError'>, 'OverflowError': <class 'OverflowError'>, 'ZeroDivisionError': <class 'ZeroDivisionError'>, 'BytesWarning': <class 'BytesWarning'>, 'DeprecationWarning': <class 'DeprecationWarning'>, 'EncodingWarning': <class 'EncodingWarning'>, 'FutureWarning': <class 'FutureWarning'>, 'ImportWarning': <class 'ImportWarning'>, 'PendingDeprecationWarning': <class 'PendingDeprecationWarning'>, 'ResourceWarning': <class 'ResourceWarning'>, 'RuntimeWarning': <class 'RuntimeWarning'>, 'SyntaxWarning': <class 'SyntaxWarning'>, 'UnicodeWarning': <class 'UnicodeWarning'>, 'UserWarning': <class 'UserWarning'>, 'BlockingIOError': <class 'BlockingIOError'>, 'ChildProcessError': <class 'ChildProcessError'>, 'ConnectionError': <class 'ConnectionError'>, 'FileExistsError': <class 'FileExistsError'>, 'FileNotFoundError': <class 'FileNotFoundError'>, 'InterruptedError': <class 'InterruptedError'>, 'IsADirectoryError': <class 'IsADirectoryError'>, 'NotADirectoryError': <class 'NotADirectoryError'>, 'PermissionError': <class 'PermissionError'>, 'ProcessLookupError': <class 'ProcessLookupError'>, 'TimeoutError': <class 'TimeoutError'>, 'IndentationError': <class 'IndentationError'>, 'IndexError': <class 'IndexError'>, 'KeyError': <class 'KeyError'>, 'ModuleNotFoundError': <class 'ModuleNotFoundError'>, 'NotImplementedError': <class 'NotImplementedError'>, 'RecursionError': <class 'RecursionError'>, 'UnboundLocalError': <class 'UnboundLocalError'>, 'UnicodeError': <class 'UnicodeError'>, 'BrokenPipeError': <class 'BrokenPipeError'>, 'ConnectionAbortedError': <class 'ConnectionAbortedError'>, 'ConnectionRefusedError': <class 'ConnectionRefusedError'>, 'ConnectionResetError': <class 'ConnectionResetError'>, 'TabError': <class 'TabError'>, 'UnicodeDecodeError': <class 'UnicodeDecodeError'>, 'UnicodeEncodeError': <class 'UnicodeEncodeError'>, 'UnicodeTranslateError': <class 'UnicodeTranslateError'>, 'ExceptionGroup': <class 'ExceptionGroup'>, 'EnvironmentError': <class 'OSError'>, 'IOError': <class 'OSError'>, 'open': <built-in function open>, 'quit': Use quit() or Ctrl-D (i.e. EOF) to exit, 'exit': Use exit() or Ctrl-D (i.e. EOF) to exit, 'copyright': Copyright (c) 2001-2023 Python Software Foundation.
+All Rights Reserved.
+
+Copyright (c) 2000 BeOpen.com.
+All Rights Reserved.
+
+Copyright (c) 1995-2001 Corporation for National Research Initiatives.
+All Rights Reserved.
+
+Copyright (c) 1991-1995 Stichting Mathematisch Centrum, Amsterdam.
+All Rights Reserved., 'credits':     Thanks to CWI, CNRI, BeOpen, Zope Corporation, the Python Software
+    Foundation, and a cast of thousands for supporting Python
+    development.  See www.python.org for more information., 'license': Type license() to see the full license text, 'help': Type help() for interactive help, or help(object) for help about object.}, 'torch': <module 'torch' from '/home/sahanp/.conda/envs/triton-test3/lib/python3.12/site-packages/torch/__init__.py'>, 'nn': <module 'torch.nn' from '/home/sahanp/.conda/envs/triton-test3/lib/python3.12/site-packages/torch/nn/__init__.py'>, 'Model': <class 'Model'>, 'batch_size': 128, 'm': 128, 'k': 256, 'n': 512, 'get_inputs': <function get_inputs at 0x7f39ea76b420>, 'get_init_inputs': <function get_init_inputs at 0x7f39ea76b600>, 'BUILD_DIRECTORY': '/home/sahanp/repos/KernelBench/cache/test_hf_level_1/3/0'}
+build_directory: /home/sahanp/repos/KernelBench/cache/test_hf_level_1/3/0
+model_custom_src: import os
+os.environ['TORCH_EXTENSIONS_DIR'] = '/home/sahanp/repos/KernelBench/cache/test_hf_level_1/3/0'
+import torch
+import torch.nn as nn
+import triton
+import triton.language as tl
+
+@triton.jit
+def bmm_kernel(
+    A_ptr,         # Pointer to first input matrix
+    B_ptr,         # Pointer to second input matrix
+    C_ptr,         # Pointer to output matrix
+    batch_size,    # Batch size
+    m,             # Number of rows in A and C
+    k,             # Number of columns in A and rows in B
+    n,             # Number of columns in B and C
+    stride_A_batch, stride_A_m, stride_A_k,  # Strides for A
+    stride_B_batch, stride_B_k, stride_B_n,  # Strides for B
+    stride_C_batch, stride_C_m, stride_C_n,  # Strides for C
+    BLOCK_SIZE_M: tl.constexpr, BLOCK_SIZE_N: tl.constexpr, BLOCK_SIZE_K: tl.constexpr
+):
+    # Get the batch index
+    batch_idx = tl.program_id(0)
+
+    # Get the row and column indices for the output matrix C
+    row_idx = tl.program_id(1) * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)
+    col_idx = tl.program_id(2) * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)
+
+    # Initialize the accumulator
+    acc = tl.zeros((BLOCK_SIZE_M, BLOCK_SIZE_N), dtype=tl.float32)
+
+    # Loop over the K dimension
+    for k_idx in range(0, k, BLOCK_SIZE_K):
+        # Load a block of A and B
+        A_block = tl.load(A_ptr + batch_idx * stride_A_batch + row_idx[:, None] * stride_A_m + k_idx * stride_A_k + tl.arange(0, BLOCK_SIZE_K)[None, :], mask=(row_idx[:, None] < m) & (tl.arange(0, BLOCK_SIZE_K)[None, :] < k), other=0.0)
+        B_block = tl.load(B_ptr + batch_idx * stride_B_batch + k_idx * stride_B_k + tl.arange(0, BLOCK_SIZE_K)[:, None] * stride_B_n + col_idx[None, :], mask=(tl.arange(0, BLOCK_SIZE_K)[:, None] < k) & (col_idx[None, :] < n), other=0.0)
+
+        # Perform the matrix multiplication
+        acc += tl.dot(A_block, B_block)
+
+    # Store the result in C
+    tl.store(C_ptr + batch_idx * stride_C_batch + row_idx[:, None] * stride_C_m + col_idx[None, :], acc, mask=(row_idx[:, None] < m) & (col_idx[None, :] < n))
+
+def triton_bmm(A: torch.Tensor, B: torch.Tensor) -> torch.Tensor:
+    """
+    This function wraps the Triton kernel call for batched matrix multiplication.
+    """
+    assert A.is_cuda and B.is_cuda, "Tensors must be on CUDA."
+    assert A.dim() == 3 and B.dim() == 3, "Inputs must be 3D tensors."
+    assert A.size(0) == B.size(0), "Batch sizes must match."
+    assert A.size(2) == B.size(1), "Inner dimensions must match."
+
+    batch_size, m, k = A.shape
+    _, _, n = B.shape
+
+    # Prepare output tensor
+    C = torch.empty(batch_size, m, n, device=A.device, dtype=A.dtype)
+
+    # Define block sizes
+    BLOCK_SIZE_M = 32
+    BLOCK_SIZE_N = 32
+    BLOCK_SIZE_K = 32
+
+    # Determine the grid size
+    grid = lambda meta: (batch_size, (m + meta['BLOCK_SIZE_M'] - 1) // meta['BLOCK_SIZE_M'], (n + meta['BLOCK_SIZE_N'] - 1) // meta['BLOCK_SIZE_N'])
+
+    # Launch the Triton kernel
+    bmm_kernel[grid](
+        A, B, C, batch_size, m, k, n,
+        A.stride(0), A.stride(1), A.stride(2),
+        B.stride(0), B.stride(1), B.stride(2),
+        C.stride(0), C.stride(1), C.stride(2),
+        BLOCK_SIZE_M=BLOCK_SIZE_M, BLOCK_SIZE_N=BLOCK_SIZE_N, BLOCK_SIZE_K=BLOCK_SIZE_K
+    )
+
+    return C
+
+class ModelNew(nn.Module):
+    def __init__(self):
+        super(ModelNew, self).__init__()
+
+    def forward(self, A: torch.Tensor, B: torch.Tensor) -> torch.Tensor:
+        # Use the Triton-based batched matrix multiplication
+        return triton_bmm(A, B)
+Failed to compile custom CUDA kernel: Record as compilation failure.
+Error: could not get source code
+--------------------------------------------------------------------------------------------------------------------------------
+[Eval Result] Problem ID: 3, Sample ID: 0
+compiled=False correctness=False metadata={'hardware': 'NVIDIA H100', 'device': 'cuda:0', 'compilation_error': OSError('could not get source code')} runtime=-1.0 runtime_stats={}
+Adding Eval Result to file for problem 3 sample 0
+[WARNING] Metadata is not JSON serializable, error: Object of type OSError is not JSON serializable
+[WARNING] Metadata now converted to be JSON serializable: {'hardware': 'NVIDIA H100', 'device': 'cuda:0', 'compilation_error': 'could not get source code'}
+--------------------------------------------------------------------------------------------------------------------------------
+[Curr batch] Evaluation took 3.38 seconds
+[Curr Batch] 1 tasks over 1 GPUs; [Total Work left] 96
+we are loading custom model
+we were able to compile the custom model
+context: {'__builtins__': {'__name__': 'builtins', '__doc__': "Built-in functions, types, exceptions, and other objects.\n\nThis module provides direct access to all 'built-in'\nidentifiers of Python; for example, builtins.len is\nthe full name for the built-in function len().\n\nThis module is not normally accessed explicitly by most\napplications, but can be useful in modules that provide\nobjects with the same name as a built-in value, but in\nwhich the built-in of that name is also needed.", '__package__': '', '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': ModuleSpec(name='builtins', loader=<class '_frozen_importlib.BuiltinImporter'>, origin='built-in'), '__build_class__': <built-in function __build_class__>, '__import__': <built-in function __import__>, 'abs': <built-in function abs>, 'all': <built-in function all>, 'any': <built-in function any>, 'ascii': <built-in function ascii>, 'bin': <built-in function bin>, 'breakpoint': <built-in function breakpoint>, 'callable': <built-in function callable>, 'chr': <built-in function chr>, 'compile': <built-in function compile>, 'delattr': <built-in function delattr>, 'dir': <built-in function dir>, 'divmod': <built-in function divmod>, 'eval': <built-in function eval>, 'exec': <built-in function exec>, 'format': <built-in function format>, 'getattr': <built-in function getattr>, 'globals': <built-in function globals>, 'hasattr': <built-in function hasattr>, 'hash': <built-in function hash>, 'hex': <built-in function hex>, 'id': <built-in function id>, 'input': <built-in function input>, 'isinstance': <built-in function isinstance>, 'issubclass': <built-in function issubclass>, 'iter': <built-in function iter>, 'aiter': <built-in function aiter>, 'len': <built-in function len>, 'locals': <built-in function locals>, 'max': <built-in function max>, 'min': <built-in function min>, 'next': <built-in function next>, 'anext': <built-in function anext>, 'oct': <built-in function oct>, 'ord': <built-in function ord>, 'pow': <built-in function pow>, 'print': <built-in function print>, 'repr': <built-in function repr>, 'round': <built-in function round>, 'setattr': <built-in function setattr>, 'sorted': <built-in function sorted>, 'sum': <built-in function sum>, 'vars': <built-in function vars>, 'None': None, 'Ellipsis': Ellipsis, 'NotImplemented': NotImplemented, 'False': False, 'True': True, 'bool': <class 'bool'>, 'memoryview': <class 'memoryview'>, 'bytearray': <class 'bytearray'>, 'bytes': <class 'bytes'>, 'classmethod': <class 'classmethod'>, 'complex': <class 'complex'>, 'dict': <class 'dict'>, 'enumerate': <class 'enumerate'>, 'filter': <class 'filter'>, 'float': <class 'float'>, 'frozenset': <class 'frozenset'>, 'property': <class 'property'>, 'int': <class 'int'>, 'list': <class 'list'>, 'map': <class 'map'>, 'object': <class 'object'>, 'range': <class 'range'>, 'reversed': <class 'reversed'>, 'set': <class 'set'>, 'slice': <class 'slice'>, 'staticmethod': <class 'staticmethod'>, 'str': <class 'str'>, 'super': <class 'super'>, 'tuple': <class 'tuple'>, 'type': <class 'type'>, 'zip': <class 'zip'>, '__debug__': True, 'BaseException': <class 'BaseException'>, 'BaseExceptionGroup': <class 'BaseExceptionGroup'>, 'Exception': <class 'Exception'>, 'GeneratorExit': <class 'GeneratorExit'>, 'KeyboardInterrupt': <class 'KeyboardInterrupt'>, 'SystemExit': <class 'SystemExit'>, 'ArithmeticError': <class 'ArithmeticError'>, 'AssertionError': <class 'AssertionError'>, 'AttributeError': <class 'AttributeError'>, 'BufferError': <class 'BufferError'>, 'EOFError': <class 'EOFError'>, 'ImportError': <class 'ImportError'>, 'LookupError': <class 'LookupError'>, 'MemoryError': <class 'MemoryError'>, 'NameError': <class 'NameError'>, 'OSError': <class 'OSError'>, 'ReferenceError': <class 'ReferenceError'>, 'RuntimeError': <class 'RuntimeError'>, 'StopAsyncIteration': <class 'StopAsyncIteration'>, 'StopIteration': <class 'StopIteration'>, 'SyntaxError': <class 'SyntaxError'>, 'SystemError': <class 'SystemError'>, 'TypeError': <class 'TypeError'>, 'ValueError': <class 'ValueError'>, 'Warning': <class 'Warning'>, 'FloatingPointError': <class 'FloatingPointError'>, 'OverflowError': <class 'OverflowError'>, 'ZeroDivisionError': <class 'ZeroDivisionError'>, 'BytesWarning': <class 'BytesWarning'>, 'DeprecationWarning': <class 'DeprecationWarning'>, 'EncodingWarning': <class 'EncodingWarning'>, 'FutureWarning': <class 'FutureWarning'>, 'ImportWarning': <class 'ImportWarning'>, 'PendingDeprecationWarning': <class 'PendingDeprecationWarning'>, 'ResourceWarning': <class 'ResourceWarning'>, 'RuntimeWarning': <class 'RuntimeWarning'>, 'SyntaxWarning': <class 'SyntaxWarning'>, 'UnicodeWarning': <class 'UnicodeWarning'>, 'UserWarning': <class 'UserWarning'>, 'BlockingIOError': <class 'BlockingIOError'>, 'ChildProcessError': <class 'ChildProcessError'>, 'ConnectionError': <class 'ConnectionError'>, 'FileExistsError': <class 'FileExistsError'>, 'FileNotFoundError': <class 'FileNotFoundError'>, 'InterruptedError': <class 'InterruptedError'>, 'IsADirectoryError': <class 'IsADirectoryError'>, 'NotADirectoryError': <class 'NotADirectoryError'>, 'PermissionError': <class 'PermissionError'>, 'ProcessLookupError': <class 'ProcessLookupError'>, 'TimeoutError': <class 'TimeoutError'>, 'IndentationError': <class 'IndentationError'>, 'IndexError': <class 'IndexError'>, 'KeyError': <class 'KeyError'>, 'ModuleNotFoundError': <class 'ModuleNotFoundError'>, 'NotImplementedError': <class 'NotImplementedError'>, 'RecursionError': <class 'RecursionError'>, 'UnboundLocalError': <class 'UnboundLocalError'>, 'UnicodeError': <class 'UnicodeError'>, 'BrokenPipeError': <class 'BrokenPipeError'>, 'ConnectionAbortedError': <class 'ConnectionAbortedError'>, 'ConnectionRefusedError': <class 'ConnectionRefusedError'>, 'ConnectionResetError': <class 'ConnectionResetError'>, 'TabError': <class 'TabError'>, 'UnicodeDecodeError': <class 'UnicodeDecodeError'>, 'UnicodeEncodeError': <class 'UnicodeEncodeError'>, 'UnicodeTranslateError': <class 'UnicodeTranslateError'>, 'ExceptionGroup': <class 'ExceptionGroup'>, 'EnvironmentError': <class 'OSError'>, 'IOError': <class 'OSError'>, 'open': <built-in function open>, 'quit': Use quit() or Ctrl-D (i.e. EOF) to exit, 'exit': Use exit() or Ctrl-D (i.e. EOF) to exit, 'copyright': Copyright (c) 2001-2023 Python Software Foundation.
+All Rights Reserved.
+
+Copyright (c) 2000 BeOpen.com.
+All Rights Reserved.
+
+Copyright (c) 1995-2001 Corporation for National Research Initiatives.
+All Rights Reserved.
+
+Copyright (c) 1991-1995 Stichting Mathematisch Centrum, Amsterdam.
+All Rights Reserved., 'credits':     Thanks to CWI, CNRI, BeOpen, Zope Corporation, the Python Software
+    Foundation, and a cast of thousands for supporting Python
+    development.  See www.python.org for more information., 'license': Type license() to see the full license text, 'help': Type help() for interactive help, or help(object) for help about object.}, 'torch': <module 'torch' from '/home/sahanp/.conda/envs/triton-test3/lib/python3.12/site-packages/torch/__init__.py'>, 'nn': <module 'torch.nn' from '/home/sahanp/.conda/envs/triton-test3/lib/python3.12/site-packages/torch/nn/__init__.py'>, 'Model': <class 'Model'>, 'M': 256, 'K': 131072, 'get_inputs': <function get_inputs at 0x7f9aba5932e0>, 'get_init_inputs': <function get_init_inputs at 0x7f9aba5934c0>, 'BUILD_DIRECTORY': '/home/sahanp/repos/KernelBench/cache/test_hf_level_1/4/0'}
+build_directory: /home/sahanp/repos/KernelBench/cache/test_hf_level_1/4/0
+model_custom_src: import os
+os.environ['TORCH_EXTENSIONS_DIR'] = '/home/sahanp/repos/KernelBench/cache/test_hf_level_1/4/0'
+import torch
+import torch.nn as nn
+import triton
+import triton.language as tl
+
+@triton.jit
+def matvec_kernel(
+    A_ptr,         # Pointer to matrix A
+    B_ptr,         # Pointer to vector B
+    C_ptr,         # Pointer to output vector C
+    M,             # Number of rows in A
+    K,             # Number of columns in A (and rows in B)
+    BLOCK_SIZE_M: tl.constexpr,
+    BLOCK_SIZE_K: tl.constexpr
+):
+    # Each program handles a block of rows in A
+    pid_m = tl.program_id(0)
+
+    # Create a range of row offsets for this block
+    row_offsets = pid_m * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)
+    row_mask = row_offsets < M
+
+    # Initialize the output for this block
+    c = tl.zeros((BLOCK_SIZE_M,), dtype=tl.float32)
+
+    # Iterate over columns of A and rows of B
+    for k in range(0, K, BLOCK_SIZE_K):
+        # Create a range of column offsets for this block
+        col_offsets = k + tl.arange(0, BLOCK_SIZE_K)
+        col_mask = col_offsets < K
+
+        # Load a block of A and B
+        a = tl.load(A_ptr + row_offsets[:, None] * K + col_offsets[None, :], mask=row_mask[:, None] & col_mask[None, :], other=0.0)
+        b = tl.load(B_ptr + col_offsets, mask=col_mask, other=0.0)
+
+        # Accumulate the dot product
+        c += tl.sum(a * b, axis=1)
+
+    # Store the result
+    tl.store(C_ptr + row_offsets, c, mask=row_mask)
+
+def triton_matvec(A: torch.Tensor, B: torch.Tensor):
+    """
+    This function wraps the Triton kernel call for matrix-vector multiplication.
+    """
+    assert A.is_cuda and B.is_cuda, "Tensors must be on CUDA."
+    A = A.contiguous()
+    B = B.contiguous()
+
+    # Prepare output tensor
+    M, K = A.shape
+    C = torch.empty(M, 1, device='cuda')
+
+    # Define block sizes
+    BLOCK_SIZE_M = 128  # Tunable parameter for block size in M dimension
+    BLOCK_SIZE_K = 64   # Tunable parameter for block size in K dimension
+
+    # Determine the number of blocks needed
+    grid = lambda meta: ((M + meta['BLOCK_SIZE_M'] - 1) // meta['BLOCK_SIZE_M'],)
+
+    # Launch the Triton kernel
+    matvec_kernel[grid](
+        A, B, C, M, K,
+        BLOCK_SIZE_M=BLOCK_SIZE_M,
+        BLOCK_SIZE_K=BLOCK_SIZE_K
+    )
+    return C
+
+class ModelNew(nn.Module):
+    def __init__(self):
+        super(ModelNew, self).__init__()
+
+    def forward(self, A: torch.Tensor, B: torch.Tensor) -> torch.Tensor:
+        """
+        Performs matrix-vector multiplication using Triton kernel.
+
+        Args:
+            A: Input matrix of shape (M, K).
+            B: Input vector of shape (K, 1).
+
+        Returns:
+            Output vector of shape (M, 1).
+        """
+        return triton_matvec(A, B)
+Failed to compile custom CUDA kernel: Record as compilation failure.
+Error: could not get source code
+--------------------------------------------------------------------------------------------------------------------------------
+[Eval Result] Problem ID: 4, Sample ID: 0
+compiled=False correctness=False metadata={'hardware': 'NVIDIA H100', 'device': 'cuda:0', 'compilation_error': OSError('could not get source code')} runtime=-1.0 runtime_stats={}
+Adding Eval Result to file for problem 4 sample 0
+[WARNING] Metadata is not JSON serializable, error: Object of type OSError is not JSON serializable
+[WARNING] Metadata now converted to be JSON serializable: {'hardware': 'NVIDIA H100', 'device': 'cuda:0', 'compilation_error': 'could not get source code'}
+--------------------------------------------------------------------------------------------------------------------------------
+[Curr batch] Evaluation took 3.34 seconds
+[Curr Batch] 1 tasks over 1 GPUs; [Total Work left] 95
+we are loading custom model
+we were able to compile the custom model
+context: {'__builtins__': {'__name__': 'builtins', '__doc__': "Built-in functions, types, exceptions, and other objects.\n\nThis module provides direct access to all 'built-in'\nidentifiers of Python; for example, builtins.len is\nthe full name for the built-in function len().\n\nThis module is not normally accessed explicitly by most\napplications, but can be useful in modules that provide\nobjects with the same name as a built-in value, but in\nwhich the built-in of that name is also needed.", '__package__': '', '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': ModuleSpec(name='builtins', loader=<class '_frozen_importlib.BuiltinImporter'>, origin='built-in'), '__build_class__': <built-in function __build_class__>, '__import__': <built-in function __import__>, 'abs': <built-in function abs>, 'all': <built-in function all>, 'any': <built-in function any>, 'ascii': <built-in function ascii>, 'bin': <built-in function bin>, 'breakpoint': <built-in function breakpoint>, 'callable': <built-in function callable>, 'chr': <built-in function chr>, 'compile': <built-in function compile>, 'delattr': <built-in function delattr>, 'dir': <built-in function dir>, 'divmod': <built-in function divmod>, 'eval': <built-in function eval>, 'exec': <built-in function exec>, 'format': <built-in function format>, 'getattr': <built-in function getattr>, 'globals': <built-in function globals>, 'hasattr': <built-in function hasattr>, 'hash': <built-in function hash>, 'hex': <built-in function hex>, 'id': <built-in function id>, 'input': <built-in function input>, 'isinstance': <built-in function isinstance>, 'issubclass': <built-in function issubclass>, 'iter': <built-in function iter>, 'aiter': <built-in function aiter>, 'len': <built-in function len>, 'locals': <built-in function locals>, 'max': <built-in function max>, 'min': <built-in function min>, 'next': <built-in function next>, 'anext': <built-in function anext>, 'oct': <built-in function oct>, 'ord': <built-in function ord>, 'pow': <built-in function pow>, 'print': <built-in function print>, 'repr': <built-in function repr>, 'round': <built-in function round>, 'setattr': <built-in function setattr>, 'sorted': <built-in function sorted>, 'sum': <built-in function sum>, 'vars': <built-in function vars>, 'None': None, 'Ellipsis': Ellipsis, 'NotImplemented': NotImplemented, 'False': False, 'True': True, 'bool': <class 'bool'>, 'memoryview': <class 'memoryview'>, 'bytearray': <class 'bytearray'>, 'bytes': <class 'bytes'>, 'classmethod': <class 'classmethod'>, 'complex': <class 'complex'>, 'dict': <class 'dict'>, 'enumerate': <class 'enumerate'>, 'filter': <class 'filter'>, 'float': <class 'float'>, 'frozenset': <class 'frozenset'>, 'property': <class 'property'>, 'int': <class 'int'>, 'list': <class 'list'>, 'map': <class 'map'>, 'object': <class 'object'>, 'range': <class 'range'>, 'reversed': <class 'reversed'>, 'set': <class 'set'>, 'slice': <class 'slice'>, 'staticmethod': <class 'staticmethod'>, 'str': <class 'str'>, 'super': <class 'super'>, 'tuple': <class 'tuple'>, 'type': <class 'type'>, 'zip': <class 'zip'>, '__debug__': True, 'BaseException': <class 'BaseException'>, 'BaseExceptionGroup': <class 'BaseExceptionGroup'>, 'Exception': <class 'Exception'>, 'GeneratorExit': <class 'GeneratorExit'>, 'KeyboardInterrupt': <class 'KeyboardInterrupt'>, 'SystemExit': <class 'SystemExit'>, 'ArithmeticError': <class 'ArithmeticError'>, 'AssertionError': <class 'AssertionError'>, 'AttributeError': <class 'AttributeError'>, 'BufferError': <class 'BufferError'>, 'EOFError': <class 'EOFError'>, 'ImportError': <class 'ImportError'>, 'LookupError': <class 'LookupError'>, 'MemoryError': <class 'MemoryError'>, 'NameError': <class 'NameError'>, 'OSError': <class 'OSError'>, 'ReferenceError': <class 'ReferenceError'>, 'RuntimeError': <class 'RuntimeError'>, 'StopAsyncIteration': <class 'StopAsyncIteration'>, 'StopIteration': <class 'StopIteration'>, 'SyntaxError': <class 'SyntaxError'>, 'SystemError': <class 'SystemError'>, 'TypeError': <class 'TypeError'>, 'ValueError': <class 'ValueError'>, 'Warning': <class 'Warning'>, 'FloatingPointError': <class 'FloatingPointError'>, 'OverflowError': <class 'OverflowError'>, 'ZeroDivisionError': <class 'ZeroDivisionError'>, 'BytesWarning': <class 'BytesWarning'>, 'DeprecationWarning': <class 'DeprecationWarning'>, 'EncodingWarning': <class 'EncodingWarning'>, 'FutureWarning': <class 'FutureWarning'>, 'ImportWarning': <class 'ImportWarning'>, 'PendingDeprecationWarning': <class 'PendingDeprecationWarning'>, 'ResourceWarning': <class 'ResourceWarning'>, 'RuntimeWarning': <class 'RuntimeWarning'>, 'SyntaxWarning': <class 'SyntaxWarning'>, 'UnicodeWarning': <class 'UnicodeWarning'>, 'UserWarning': <class 'UserWarning'>, 'BlockingIOError': <class 'BlockingIOError'>, 'ChildProcessError': <class 'ChildProcessError'>, 'ConnectionError': <class 'ConnectionError'>, 'FileExistsError': <class 'FileExistsError'>, 'FileNotFoundError': <class 'FileNotFoundError'>, 'InterruptedError': <class 'InterruptedError'>, 'IsADirectoryError': <class 'IsADirectoryError'>, 'NotADirectoryError': <class 'NotADirectoryError'>, 'PermissionError': <class 'PermissionError'>, 'ProcessLookupError': <class 'ProcessLookupError'>, 'TimeoutError': <class 'TimeoutError'>, 'IndentationError': <class 'IndentationError'>, 'IndexError': <class 'IndexError'>, 'KeyError': <class 'KeyError'>, 'ModuleNotFoundError': <class 'ModuleNotFoundError'>, 'NotImplementedError': <class 'NotImplementedError'>, 'RecursionError': <class 'RecursionError'>, 'UnboundLocalError': <class 'UnboundLocalError'>, 'UnicodeError': <class 'UnicodeError'>, 'BrokenPipeError': <class 'BrokenPipeError'>, 'ConnectionAbortedError': <class 'ConnectionAbortedError'>, 'ConnectionRefusedError': <class 'ConnectionRefusedError'>, 'ConnectionResetError': <class 'ConnectionResetError'>, 'TabError': <class 'TabError'>, 'UnicodeDecodeError': <class 'UnicodeDecodeError'>, 'UnicodeEncodeError': <class 'UnicodeEncodeError'>, 'UnicodeTranslateError': <class 'UnicodeTranslateError'>, 'ExceptionGroup': <class 'ExceptionGroup'>, 'EnvironmentError': <class 'OSError'>, 'IOError': <class 'OSError'>, 'open': <built-in function open>, 'quit': Use quit() or Ctrl-D (i.e. EOF) to exit, 'exit': Use exit() or Ctrl-D (i.e. EOF) to exit, 'copyright': Copyright (c) 2001-2023 Python Software Foundation.
+All Rights Reserved.
+
+Copyright (c) 2000 BeOpen.com.
+All Rights Reserved.
+
+Copyright (c) 1995-2001 Corporation for National Research Initiatives.
+All Rights Reserved.
+
+Copyright (c) 1991-1995 Stichting Mathematisch Centrum, Amsterdam.
+All Rights Reserved., 'credits':     Thanks to CWI, CNRI, BeOpen, Zope Corporation, the Python Software
+    Foundation, and a cast of thousands for supporting Python
+    development.  See www.python.org for more information., 'license': Type license() to see the full license text, 'help': Type help() for interactive help, or help(object) for help about object.}, 'torch': <module 'torch' from '/home/sahanp/.conda/envs/triton-test3/lib/python3.12/site-packages/torch/__init__.py'>, 'nn': <module 'torch.nn' from '/home/sahanp/.conda/envs/triton-test3/lib/python3.12/site-packages/torch/nn/__init__.py'>, 'Model': <class 'Model'>, 'M': 16384, 'N': 4096, 'get_inputs': <function get_inputs at 0x7fae1053b2e0>, 'get_init_inputs': <function get_init_inputs at 0x7fae1053b4c0>, 'BUILD_DIRECTORY': '/home/sahanp/repos/KernelBench/cache/test_hf_level_1/5/0'}
+build_directory: /home/sahanp/repos/KernelBench/cache/test_hf_level_1/5/0
+model_custom_src: import os
+os.environ['TORCH_EXTENSIONS_DIR'] = '/home/sahanp/repos/KernelBench/cache/test_hf_level_1/5/0'
+import torch
+import torch.nn as nn
+import triton
+import triton.language as tl
+
+@triton.jit
+def mat_scalar_mul_kernel(
+    A_ptr,         # Pointer to input matrix
+    s,             # Scalar value
+    C_ptr,         # Pointer to output matrix
+    M,             # Number of rows in the matrix
+    N,             # Number of columns in the matrix
+    BLOCK_SIZE_M: tl.constexpr,
+    BLOCK_SIZE_N: tl.constexpr
+):
+    # Each program handles a block of rows and columns
+    pid_m = tl.program_id(0)
+    pid_n = tl.program_id(1)
+
+    # Create ranges for rows and columns
+    row_offsets = pid_m * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)
+    col_offsets = pid_n * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)
+
+    # Create masks to ensure we don't go out of bounds
+    row_mask = row_offsets < M
+    col_mask = col_offsets < N
+
+    # Load the input matrix values
+    A = tl.load(A_ptr + row_offsets[:, None] * N + col_offsets[None, :], mask=row_mask[:, None] & col_mask[None, :], other=0.0)
+
+    # Perform the matrix-scalar multiplication
+    C = A * s
+
+    # Store the result
+    tl.store(C_ptr + row_offsets[:, None] * N + col_offsets[None, :], C, mask=row_mask[:, None] & col_mask[None, :])
+
+def triton_mat_scalar_mul(A: torch.Tensor, s: float):
+    """
+    This function wraps the Triton kernel call. It:
+      1. Ensures the input matrix is contiguous on GPU.
+      2. Calculates the grid (blocks) needed.
+      3. Launches the Triton kernel.
+    """
+    assert A.is_cuda, "Input matrix must be on CUDA."
+    A = A.contiguous()
+
+    # Prepare output tensor
+    C = torch.empty_like(A)
+
+    # Matrix dimensions
+    M, N = A.shape
+
+    # Block sizes (tunable parameters)
+    BLOCK_SIZE_M = 64
+    BLOCK_SIZE_N = 64
+
+    # Determine the number of blocks needed
+    grid = lambda meta: ((M + meta['BLOCK_SIZE_M'] - 1) // meta['BLOCK_SIZE_M'],
+                         (N + meta['BLOCK_SIZE_N'] - 1) // meta['BLOCK_SIZE_N'])
+
+    # Launch the Triton kernel
+    mat_scalar_mul_kernel[grid](
+        A, s, C, M, N,
+        BLOCK_SIZE_M=BLOCK_SIZE_M,
+        BLOCK_SIZE_N=BLOCK_SIZE_N
+    )
+    return C
+
+class ModelNew(nn.Module):
+    def __init__(self):
+        super(ModelNew, self).__init__()
+
+    def forward(self, A: torch.Tensor, s: float) -> torch.Tensor:
+        # Instead of "return A * s", call our Triton-based matrix-scalar multiplication
+        return triton_mat_scalar_mul(A, s)
+Failed to compile custom CUDA kernel: Record as compilation failure.
+Error: could not get source code
+--------------------------------------------------------------------------------------------------------------------------------
+[Eval Result] Problem ID: 5, Sample ID: 0
+compiled=False correctness=False metadata={'hardware': 'NVIDIA H100', 'device': 'cuda:0', 'compilation_error': OSError('could not get source code')} runtime=-1.0 runtime_stats={}
+Adding Eval Result to file for problem 5 sample 0
+[WARNING] Metadata is not JSON serializable, error: Object of type OSError is not JSON serializable
+[WARNING] Metadata now converted to be JSON serializable: {'hardware': 'NVIDIA H100', 'device': 'cuda:0', 'compilation_error': 'could not get source code'}
+--------------------------------------------------------------------------------------------------------------------------------
+[Curr batch] Evaluation took 3.38 seconds
+[Curr Batch] 1 tasks over 1 GPUs; [Total Work left] 94
+we are loading custom model
+we were able to compile the custom model
+context: {'__builtins__': {'__name__': 'builtins', '__doc__': "Built-in functions, types, exceptions, and other objects.\n\nThis module provides direct access to all 'built-in'\nidentifiers of Python; for example, builtins.len is\nthe full name for the built-in function len().\n\nThis module is not normally accessed explicitly by most\napplications, but can be useful in modules that provide\nobjects with the same name as a built-in value, but in\nwhich the built-in of that name is also needed.", '__package__': '', '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': ModuleSpec(name='builtins', loader=<class '_frozen_importlib.BuiltinImporter'>, origin='built-in'), '__build_class__': <built-in function __build_class__>, '__import__': <built-in function __import__>, 'abs': <built-in function abs>, 'all': <built-in function all>, 'any': <built-in function any>, 'ascii': <built-in function ascii>, 'bin': <built-in function bin>, 'breakpoint': <built-in function breakpoint>, 'callable': <built-in function callable>, 'chr': <built-in function chr>, 'compile': <built-in function compile>, 'delattr': <built-in function delattr>, 'dir': <built-in function dir>, 'divmod': <built-in function divmod>, 'eval': <built-in function eval>, 'exec': <built-in function exec>, 'format': <built-in function format>, 'getattr': <built-in function getattr>, 'globals': <built-in function globals>, 'hasattr': <built-in function hasattr>, 'hash': <built-in function hash>, 'hex': <built-in function hex>, 'id': <built-in function id>, 'input': <built-in function input>, 'isinstance': <built-in function isinstance>, 'issubclass': <built-in function issubclass>, 'iter': <built-in function iter>, 'aiter': <built-in function aiter>, 'len': <built-in function len>, 'locals': <built-in function locals>, 'max': <built-in function max>, 'min': <built-in function min>, 'next': <built-in function next>, 'anext': <built-in function anext>, 'oct': <built-in function oct>, 'ord': <built-in function ord>, 'pow': <built-in function pow>, 'print': <built-in function print>, 'repr': <built-in function repr>, 'round': <built-in function round>, 'setattr': <built-in function setattr>, 'sorted': <built-in function sorted>, 'sum': <built-in function sum>, 'vars': <built-in function vars>, 'None': None, 'Ellipsis': Ellipsis, 'NotImplemented': NotImplemented, 'False': False, 'True': True, 'bool': <class 'bool'>, 'memoryview': <class 'memoryview'>, 'bytearray': <class 'bytearray'>, 'bytes': <class 'bytes'>, 'classmethod': <class 'classmethod'>, 'complex': <class 'complex'>, 'dict': <class 'dict'>, 'enumerate': <class 'enumerate'>, 'filter': <class 'filter'>, 'float': <class 'float'>, 'frozenset': <class 'frozenset'>, 'property': <class 'property'>, 'int': <class 'int'>, 'list': <class 'list'>, 'map': <class 'map'>, 'object': <class 'object'>, 'range': <class 'range'>, 'reversed': <class 'reversed'>, 'set': <class 'set'>, 'slice': <class 'slice'>, 'staticmethod': <class 'staticmethod'>, 'str': <class 'str'>, 'super': <class 'super'>, 'tuple': <class 'tuple'>, 'type': <class 'type'>, 'zip': <class 'zip'>, '__debug__': True, 'BaseException': <class 'BaseException'>, 'BaseExceptionGroup': <class 'BaseExceptionGroup'>, 'Exception': <class 'Exception'>, 'GeneratorExit': <class 'GeneratorExit'>, 'KeyboardInterrupt': <class 'KeyboardInterrupt'>, 'SystemExit': <class 'SystemExit'>, 'ArithmeticError': <class 'ArithmeticError'>, 'AssertionError': <class 'AssertionError'>, 'AttributeError': <class 'AttributeError'>, 'BufferError': <class 'BufferError'>, 'EOFError': <class 'EOFError'>, 'ImportError': <class 'ImportError'>, 'LookupError': <class 'LookupError'>, 'MemoryError': <class 'MemoryError'>, 'NameError': <class 'NameError'>, 'OSError': <class 'OSError'>, 'ReferenceError': <class 'ReferenceError'>, 'RuntimeError': <class 'RuntimeError'>, 'StopAsyncIteration': <class 'StopAsyncIteration'>, 'StopIteration': <class 'StopIteration'>, 'SyntaxError': <class 'SyntaxError'>, 'SystemError': <class 'SystemError'>, 'TypeError': <class 'TypeError'>, 'ValueError': <class 'ValueError'>, 'Warning': <class 'Warning'>, 'FloatingPointError': <class 'FloatingPointError'>, 'OverflowError': <class 'OverflowError'>, 'ZeroDivisionError': <class 'ZeroDivisionError'>, 'BytesWarning': <class 'BytesWarning'>, 'DeprecationWarning': <class 'DeprecationWarning'>, 'EncodingWarning': <class 'EncodingWarning'>, 'FutureWarning': <class 'FutureWarning'>, 'ImportWarning': <class 'ImportWarning'>, 'PendingDeprecationWarning': <class 'PendingDeprecationWarning'>, 'ResourceWarning': <class 'ResourceWarning'>, 'RuntimeWarning': <class 'RuntimeWarning'>, 'SyntaxWarning': <class 'SyntaxWarning'>, 'UnicodeWarning': <class 'UnicodeWarning'>, 'UserWarning': <class 'UserWarning'>, 'BlockingIOError': <class 'BlockingIOError'>, 'ChildProcessError': <class 'ChildProcessError'>, 'ConnectionError': <class 'ConnectionError'>, 'FileExistsError': <class 'FileExistsError'>, 'FileNotFoundError': <class 'FileNotFoundError'>, 'InterruptedError': <class 'InterruptedError'>, 'IsADirectoryError': <class 'IsADirectoryError'>, 'NotADirectoryError': <class 'NotADirectoryError'>, 'PermissionError': <class 'PermissionError'>, 'ProcessLookupError': <class 'ProcessLookupError'>, 'TimeoutError': <class 'TimeoutError'>, 'IndentationError': <class 'IndentationError'>, 'IndexError': <class 'IndexError'>, 'KeyError': <class 'KeyError'>, 'ModuleNotFoundError': <class 'ModuleNotFoundError'>, 'NotImplementedError': <class 'NotImplementedError'>, 'RecursionError': <class 'RecursionError'>, 'UnboundLocalError': <class 'UnboundLocalError'>, 'UnicodeError': <class 'UnicodeError'>, 'BrokenPipeError': <class 'BrokenPipeError'>, 'ConnectionAbortedError': <class 'ConnectionAbortedError'>, 'ConnectionRefusedError': <class 'ConnectionRefusedError'>, 'ConnectionResetError': <class 'ConnectionResetError'>, 'TabError': <class 'TabError'>, 'UnicodeDecodeError': <class 'UnicodeDecodeError'>, 'UnicodeEncodeError': <class 'UnicodeEncodeError'>, 'UnicodeTranslateError': <class 'UnicodeTranslateError'>, 'ExceptionGroup': <class 'ExceptionGroup'>, 'EnvironmentError': <class 'OSError'>, 'IOError': <class 'OSError'>, 'open': <built-in function open>, 'quit': Use quit() or Ctrl-D (i.e. EOF) to exit, 'exit': Use exit() or Ctrl-D (i.e. EOF) to exit, 'copyright': Copyright (c) 2001-2023 Python Software Foundation.
+All Rights Reserved.
+
+Copyright (c) 2000 BeOpen.com.
+All Rights Reserved.
+
+Copyright (c) 1995-2001 Corporation for National Research Initiatives.
+All Rights Reserved.
+
+Copyright (c) 1991-1995 Stichting Mathematisch Centrum, Amsterdam.
+All Rights Reserved., 'credits':     Thanks to CWI, CNRI, BeOpen, Zope Corporation, the Python Software
+    Foundation, and a cast of thousands for supporting Python
+    development.  See www.python.org for more information., 'license': Type license() to see the full license text, 'help': Type help() for interactive help, or help(object) for help about object.}, 'torch': <module 'torch' from '/home/sahanp/.conda/envs/triton-test3/lib/python3.12/site-packages/torch/__init__.py'>, 'nn': <module 'torch.nn' from '/home/sahanp/.conda/envs/triton-test3/lib/python3.12/site-packages/torch/nn/__init__.py'>, 'Model': <class 'Model'>, 'M': 256, 'N': 256, 'K': 131072, 'get_inputs': <function get_inputs at 0x7fbe32e2f380>, 'get_init_inputs': <function get_init_inputs at 0x7fbe32e2f560>, 'BUILD_DIRECTORY': '/home/sahanp/repos/KernelBench/cache/test_hf_level_1/6/0'}
+build_directory: /home/sahanp/repos/KernelBench/cache/test_hf_level_1/6/0
+model_custom_src: import os
+os.environ['TORCH_EXTENSIONS_DIR'] = '/home/sahanp/repos/KernelBench/cache/test_hf_level_1/6/0'
+import torch
+import torch.nn as nn
+import triton
+import triton.language as tl
+
+@triton.jit
+def matmul_kernel(
+    # Pointers to matrices
+    A_ptr, B_ptr, C_ptr,
+    # Matrix dimensions
+    M, N, K,
+    # Strides
+    stride_am, stride_ak,
+    stride_bk, stride_bn,
+    stride_cm, stride_cn,
+    # Meta-parameters
+    BLOCK_SIZE_M: tl.constexpr, BLOCK_SIZE_N: tl.constexpr, BLOCK_SIZE_K: tl.constexpr,
+):
+    # Program ID
+    pid = tl.program_id(axis=0)
+    num_pid_m = tl.cdiv(M, BLOCK_SIZE_M)
+    num_pid_n = tl.cdiv(N, BLOCK_SIZE_N)
+    pid_m = pid // num_pid_n
+    pid_n = pid % num_pid_n
+
+    # Offsets for the block
+    offs_am = (pid_m * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)) % M
+    offs_bn = (pid_n * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)) % N
+    offs_k = tl.arange(0, BLOCK_SIZE_K)
+
+    # Initialize accumulator
+    acc = tl.zeros((BLOCK_SIZE_M, BLOCK_SIZE_N), dtype=tl.float32)
+
+    # Loop over K dimension
+    for k in range(0, K, BLOCK_SIZE_K):
+        # Load slices of A and B
+        a = tl.load(A_ptr + offs_am[:, None] * stride_am + offs_k[None, :] * stride_ak, mask=offs_k[None, :] < K - k, other=0.0)
+        b = tl.load(B_ptr + offs_k[:, None] * stride_bk + offs_bn[None, :] * stride_bn, mask=offs_k[:, None] < K - k, other=0.0)
+        # Accumulate
+        acc += tl.dot(a, b)
+
+    # Store the result
+    offs_cm = pid_m * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)
+    offs_cn = pid_n * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)
+    tl.store(C_ptr + offs_cm[:, None] * stride_cm + offs_cn[None, :] * stride_cn, acc, mask=(offs_cm[:, None] < M) & (offs_cn[None, :] < N))
+
+def triton_matmul(A: torch.Tensor, B: torch.Tensor) -> torch.Tensor:
+    """
+    This function wraps the Triton kernel call for matrix multiplication.
+    """
+    assert A.is_cuda and B.is_cuda, "Tensors must be on CUDA."
+    A = A.contiguous()
+    B = B.contiguous()
+
+    # Output tensor
+    M, K = A.shape
+    K, N = B.shape
+    C = torch.empty((M, N), device=A.device, dtype=A.dtype)
+
+    # Kernel parameters
+    BLOCK_SIZE_M = 64
+    BLOCK_SIZE_N = 64
+    BLOCK_SIZE_K = 32
+
+    # Grid size
+    grid = lambda meta: ((M + meta['BLOCK_SIZE_M'] - 1) // meta['BLOCK_SIZE_M']) * ((N + meta['BLOCK_SIZE_N'] - 1) // meta['BLOCK_SIZE_N']),
+
+    # Launch the kernel
+    matmul_kernel[grid](
+        A, B, C,
+        M, N, K,
+        A.stride(0), A.stride(1),
+        B.stride(0), B.stride(1),
+        C.stride(0), C.stride(1),
+        BLOCK_SIZE_M=BLOCK_SIZE_M, BLOCK_SIZE_N=BLOCK_SIZE_N, BLOCK_SIZE_K=BLOCK_SIZE_K
+    )
+    return C
+
+class ModelNew(nn.Module):
+    def __init__(self):
+        super(ModelNew, self).__init__()
+
+    def forward(self, A: torch.Tensor, B: torch.Tensor) -> torch.Tensor:
+        return triton_matmul(A, B)--------------------------------------------------------------------------------------------------------------------------------
+[Eval Result] Problem ID: 6, Sample ID: 0
+compiled=False correctness=False metadata={'hardware': 'NVIDIA H100', 'device': 'cuda:0', 'compilation_error': OSError('could not get source code')} runtime=-1.0 runtime_stats={}
+Adding Eval Result to file for problem 6 sample 0
+[WARNING] Metadata is not JSON serializable, error: Object of type OSError is not JSON serializable
+[WARNING] Metadata now converted to be JSON serializable: {'hardware': 'NVIDIA H100', 'device': 'cuda:0', 'compilation_error': 'could not get source code'}
+--------------------------------------------------------------------------------------------------------------------------------
+[Curr batch] Evaluation took 3.34 seconds
+[Curr Batch] 1 tasks over 1 GPUs; [Total Work left] 93
+we are loading custom model
+we were able to compile the custom model
+context: {'__builtins__': {'__name__': 'builtins', '__doc__': "Built-in functions, types, exceptions, and other objects.\n\nThis module provides direct access to all 'built-in'\nidentifiers of Python; for example, builtins.len is\nthe full name for the built-in function len().\n\nThis module is not normally accessed explicitly by most\napplications, but can be useful in modules that provide\nobjects with the same name as a built-in value, but in\nwhich the built-in of that name is also needed.", '__package__': '', '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': ModuleSpec(name='builtins', loader=<class '_frozen_importlib.BuiltinImporter'>, origin='built-in'), '__build_class__': <built-in function __build_class__>, '__import__': <built-in function __import__>, 'abs': <built-in function abs>, 'all': <built-in function all>, 'any': <built-in function any>, 'ascii': <built-in function ascii>, 'bin': <built-in function bin>, 'breakpoint': <built-in function breakpoint>, 'callable': <built-in function callable>, 'chr': <built-in function chr>, 'compile': <built-in function compile>, 'delattr': <built-in function delattr>, 'dir': <built-in function dir>, 'divmod': <built-in function divmod>, 'eval': <built-in function eval>, 'exec': <built-in function exec>, 'format': <built-in function format>, 'getattr': <built-in function getattr>, 'globals': <built-in function globals>, 'hasattr': <built-in function hasattr>, 'hash': <built-in function hash>, 'hex': <built-in function hex>, 'id': <built-in function id>, 'input': <built-in function input>, 'isinstance': <built-in function isinstance>, 'issubclass': <built-in function issubclass>, 'iter': <built-in function iter>, 'aiter': <built-in function aiter>, 'len': <built-in function len>, 'locals': <built-in function locals>, 'max': <built-in function max>, 'min': <built-in function min>, 'next': <built-in function next>, 'anext': <built-in function anext>, 'oct': <built-in function oct>, 'ord': <built-in function ord>, 'pow': <built-in function pow>, 'print': <built-in function print>, 'repr': <built-in function repr>, 'round': <built-in function round>, 'setattr': <built-in function setattr>, 'sorted': <built-in function sorted>, 'sum': <built-in function sum>, 'vars': <built-in function vars>, 'None': None, 'Ellipsis': Ellipsis, 'NotImplemented': NotImplemented, 'False': False, 'True': True, 'bool': <class 'bool'>, 'memoryview': <class 'memoryview'>, 'bytearray': <class 'bytearray'>, 'bytes': <class 'bytes'>, 'classmethod': <class 'classmethod'>, 'complex': <class 'complex'>, 'dict': <class 'dict'>, 'enumerate': <class 'enumerate'>, 'filter': <class 'filter'>, 'float': <class 'float'>, 'frozenset': <class 'frozenset'>, 'property': <class 'property'>, 'int': <class 'int'>, 'list': <class 'list'>, 'map': <class 'map'>, 'object': <class 'object'>, 'range': <class 'range'>, 'reversed': <class 'reversed'>, 'set': <class 'set'>, 'slice': <class 'slice'>, 'staticmethod': <class 'staticmethod'>, 'str': <class 'str'>, 'super': <class 'super'>, 'tuple': <class 'tuple'>, 'type': <class 'type'>, 'zip': <class 'zip'>, '__debug__': True, 'BaseException': <class 'BaseException'>, 'BaseExceptionGroup': <class 'BaseExceptionGroup'>, 'Exception': <class 'Exception'>, 'GeneratorExit': <class 'GeneratorExit'>, 'KeyboardInterrupt': <class 'KeyboardInterrupt'>, 'SystemExit': <class 'SystemExit'>, 'ArithmeticError': <class 'ArithmeticError'>, 'AssertionError': <class 'AssertionError'>, 'AttributeError': <class 'AttributeError'>, 'BufferError': <class 'BufferError'>, 'EOFError': <class 'EOFError'>, 'ImportError': <class 'ImportError'>, 'LookupError': <class 'LookupError'>, 'MemoryError': <class 'MemoryError'>, 'NameError': <class 'NameError'>, 'OSError': <class 'OSError'>, 'ReferenceError': <class 'ReferenceError'>, 'RuntimeError': <class 'RuntimeError'>, 'StopAsyncIteration': <class 'StopAsyncIteration'>, 'StopIteration': <class 'StopIteration'>, 'SyntaxError': <class 'SyntaxError'>, 'SystemError': <class 'SystemError'>, 'TypeError': <class 'TypeError'>, 'ValueError': <class 'ValueError'>, 'Warning': <class 'Warning'>, 'FloatingPointError': <class 'FloatingPointError'>, 'OverflowError': <class 'OverflowError'>, 'ZeroDivisionError': <class 'ZeroDivisionError'>, 'BytesWarning': <class 'BytesWarning'>, 'DeprecationWarning': <class 'DeprecationWarning'>, 'EncodingWarning': <class 'EncodingWarning'>, 'FutureWarning': <class 'FutureWarning'>, 'ImportWarning': <class 'ImportWarning'>, 'PendingDeprecationWarning': <class 'PendingDeprecationWarning'>, 'ResourceWarning': <class 'ResourceWarning'>, 'RuntimeWarning': <class 'RuntimeWarning'>, 'SyntaxWarning': <class 'SyntaxWarning'>, 'UnicodeWarning': <class 'UnicodeWarning'>, 'UserWarning': <class 'UserWarning'>, 'BlockingIOError': <class 'BlockingIOError'>, 'ChildProcessError': <class 'ChildProcessError'>, 'ConnectionError': <class 'ConnectionError'>, 'FileExistsError': <class 'FileExistsError'>, 'FileNotFoundError': <class 'FileNotFoundError'>, 'InterruptedError': <class 'InterruptedError'>, 'IsADirectoryError': <class 'IsADirectoryError'>, 'NotADirectoryError': <class 'NotADirectoryError'>, 'PermissionError': <class 'PermissionError'>, 'ProcessLookupError': <class 'ProcessLookupError'>, 'TimeoutError': <class 'TimeoutError'>, 'IndentationError': <class 'IndentationError'>, 'IndexError': <class 'IndexError'>, 'KeyError': <class 'KeyError'>, 'ModuleNotFoundError': <class 'ModuleNotFoundError'>, 'NotImplementedError': <class 'NotImplementedError'>, 'RecursionError': <class 'RecursionError'>, 'UnboundLocalError': <class 'UnboundLocalError'>, 'UnicodeError': <class 'UnicodeError'>, 'BrokenPipeError': <class 'BrokenPipeError'>, 'ConnectionAbortedError': <class 'ConnectionAbortedError'>, 'ConnectionRefusedError': <class 'ConnectionRefusedError'>, 'ConnectionResetError': <class 'ConnectionResetError'>, 'TabError': <class 'TabError'>, 'UnicodeDecodeError': <class 'UnicodeDecodeError'>, 'UnicodeEncodeError': <class 'UnicodeEncodeError'>, 'UnicodeTranslateError': <class 'UnicodeTranslateError'>, 'ExceptionGroup': <class 'ExceptionGroup'>, 'EnvironmentError': <class 'OSError'>, 'IOError': <class 'OSError'>, 'open': <built-in function open>, 'quit': Use quit() or Ctrl-D (i.e. EOF) to exit, 'exit': Use exit() or Ctrl-D (i.e. EOF) to exit, 'copyright': Copyright (c) 2001-2023 Python Software Foundation.
+All Rights Reserved.
+
+Copyright (c) 2000 BeOpen.com.
+All Rights Reserved.
+
+Copyright (c) 1995-2001 Corporation for National Research Initiatives.
+All Rights Reserved.
+
+Copyright (c) 1991-1995 Stichting Mathematisch Centrum, Amsterdam.
+All Rights Reserved., 'credits':     Thanks to CWI, CNRI, BeOpen, Zope Corporation, the Python Software
+    Foundation, and a cast of thousands for supporting Python
+    development.  See www.python.org for more information., 'license': Type license() to see the full license text, 'help': Type help() for interactive help, or help(object) for help about object.}, 'torch': <module 'torch' from '/home/sahanp/.conda/envs/triton-test3/lib/python3.12/site-packages/torch/__init__.py'>, 'nn': <module 'torch.nn' from '/home/sahanp/.conda/envs/triton-test3/lib/python3.12/site-packages/torch/nn/__init__.py'>, 'Model': <class 'Model'>, 'M': 16384, 'N': 16384, 'K': 32, 'get_inputs': <function get_inputs at 0x7f1225d4f380>, 'get_init_inputs': <function get_init_inputs at 0x7f1225d4f560>, 'BUILD_DIRECTORY': '/home/sahanp/repos/KernelBench/cache/test_hf_level_1/7/0'}
+build_directory: /home/sahanp/repos/KernelBench/cache/test_hf_level_1/7/0
+model_custom_src: import os
+os.environ['TORCH_EXTENSIONS_DIR'] = '/home/sahanp/repos/KernelBench/cache/test_hf_level_1/7/0'
+import torch
+import torch.nn as nn
+import triton
+import triton.language as tl
+
+@triton.jit
+def matmul_kernel(
+    A_ptr, B_ptr, C_ptr,  # Pointers to matrices A, B, and C
+    M, N, K,              # Matrix dimensions
+    stride_am, stride_ak, # Strides for matrix A
+    stride_bk, stride_bn, # Strides for matrix B
+    stride_cm, stride_cn, # Strides for matrix C
+    BLOCK_SIZE_M: tl.constexpr, BLOCK_SIZE_N: tl.constexpr, BLOCK_SIZE_K: tl.constexpr,
+):
+    # Program ID for the current block
+    pid = tl.program_id(axis=0)
+    num_pid_m = tl.cdiv(M, BLOCK_SIZE_M)
+    num_pid_n = tl.cdiv(N, BLOCK_SIZE_N)
+    pid_m = pid // num_pid_n
+    pid_n = pid % num_pid_n
+
+    # Offsets for the block
+    offs_am = (pid_m * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)) % M
+    offs_bn = (pid_n * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)) % N
+    offs_k = tl.arange(0, BLOCK_SIZE_K)
+
+    # Initialize accumulator
+    acc = tl.zeros((BLOCK_SIZE_M, BLOCK_SIZE_N), dtype=tl.float32)
+
+    # Loop over K dimension
+    for k in range(0, K, BLOCK_SIZE_K):
+        # Load slices of A and B
+        a = tl.load(A_ptr + offs_am[:, None] * stride_am + offs_k[None, :] * stride_ak, mask=offs_k[None, :] < K - k, other=0.0)
+        b = tl.load(B_ptr + offs_k[:, None] * stride_bk + offs_bn[None, :] * stride_bn, mask=offs_k[:, None] < K - k, other=0.0)
+        # Accumulate
+        acc += tl.dot(a, b)
+
+    # Store the result
+    offs_cm = pid_m * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)
+    offs_cn = pid_n * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)
+    tl.store(C_ptr + offs_cm[:, None] * stride_cm + offs_cn[None, :] * stride_cn, acc, mask=(offs_cm[:, None] < M) & (offs_cn[None, :] < N))
+
+def triton_matmul(A: torch.Tensor, B: torch.Tensor):
+    """
+    This function wraps the Triton kernel call for matrix multiplication.
+    """
+    assert A.is_cuda and B.is_cuda, "Tensors must be on CUDA."
+    A = A.contiguous()
+    B = B.contiguous()
+
+    # Prepare output tensor
+    M, K = A.shape
+    K, N = B.shape
+    C = torch.empty((M, N), device=A.device, dtype=A.dtype)
+
+    # Define block sizes
+    BLOCK_SIZE_M = 64
+    BLOCK_SIZE_N = 64
+    BLOCK_SIZE_K = 32
+
+    # Launch the Triton kernel
+    grid = lambda meta: ((M + meta['BLOCK_SIZE_M'] - 1) // meta['BLOCK_SIZE_M']) * ((N + meta['BLOCK_SIZE_N'] - 1) // meta['BLOCK_SIZE_N']),
+    matmul_kernel[grid](
+        A, B, C, M, N, K,
+        A.stride(0), A.stride(1),
+        B.stride(0), B.stride(1),
+        C.stride(0), C.stride(1),
+        BLOCK_SIZE_M=BLOCK_SIZE_M, BLOCK_SIZE_N=BLOCK_SIZE_N, BLOCK_SIZE_K=BLOCK_SIZE_K
+    )
+    return C
+
+class ModelNew(nn.Module):
+    def __init__(self):
+        super(ModelNew, self).__init__()
+
+    def forward(self, A: torch.Tensor, B: torch.Tensor) -> torch.Tensor:
+        return triton_matmul(A, B)--------------------------------------------------------------------------------------------------------------------------------
+[Eval Result] Problem ID: 7, Sample ID: 0
+compiled=False correctness=False metadata={'hardware': 'NVIDIA H100', 'device': 'cuda:0', 'compilation_error': OSError('could not get source code')} runtime=-1.0 runtime_stats={}
+Adding Eval Result to file for problem 7 sample 0
+[WARNING] Metadata is not JSON serializable, error: Object of type OSError is not JSON serializable
+[WARNING] Metadata now converted to be JSON serializable: {'hardware': 'NVIDIA H100', 'device': 'cuda:0', 'compilation_error': 'could not get source code'}
+--------------------------------------------------------------------------------------------------------------------------------
+[Curr batch] Evaluation took 4.24 seconds
+[Curr Batch] 1 tasks over 1 GPUs; [Total Work left] 92
+we are loading custom model
+we were able to compile the custom model
+context: {'__builtins__': {'__name__': 'builtins', '__doc__': "Built-in functions, types, exceptions, and other objects.\n\nThis module provides direct access to all 'built-in'\nidentifiers of Python; for example, builtins.len is\nthe full name for the built-in function len().\n\nThis module is not normally accessed explicitly by most\napplications, but can be useful in modules that provide\nobjects with the same name as a built-in value, but in\nwhich the built-in of that name is also needed.", '__package__': '', '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': ModuleSpec(name='builtins', loader=<class '_frozen_importlib.BuiltinImporter'>, origin='built-in'), '__build_class__': <built-in function __build_class__>, '__import__': <built-in function __import__>, 'abs': <built-in function abs>, 'all': <built-in function all>, 'any': <built-in function any>, 'ascii': <built-in function ascii>, 'bin': <built-in function bin>, 'breakpoint': <built-in function breakpoint>, 'callable': <built-in function callable>, 'chr': <built-in function chr>, 'compile': <built-in function compile>, 'delattr': <built-in function delattr>, 'dir': <built-in function dir>, 'divmod': <built-in function divmod>, 'eval': <built-in function eval>, 'exec': <built-in function exec>, 'format': <built-in function format>, 'getattr': <built-in function getattr>, 'globals': <built-in function globals>, 'hasattr': <built-in function hasattr>, 'hash': <built-in function hash>, 'hex': <built-in function hex>, 'id': <built-in function id>, 'input': <built-in function input>, 'isinstance': <built-in function isinstance>, 'issubclass': <built-in function issubclass>, 'iter': <built-in function iter>, 'aiter': <built-in function aiter>, 'len': <built-in function len>, 'locals': <built-in function locals>, 'max': <built-in function max>, 'min': <built-in function min>, 'next': <built-in function next>, 'anext': <built-in function anext>, 'oct': <built-in function oct>, 'ord': <built-in function ord>, 'pow': <built-in function pow>, 'print': <built-in function print>, 'repr': <built-in function repr>, 'round': <built-in function round>, 'setattr': <built-in function setattr>, 'sorted': <built-in function sorted>, 'sum': <built-in function sum>, 'vars': <built-in function vars>, 'None': None, 'Ellipsis': Ellipsis, 'NotImplemented': NotImplemented, 'False': False, 'True': True, 'bool': <class 'bool'>, 'memoryview': <class 'memoryview'>, 'bytearray': <class 'bytearray'>, 'bytes': <class 'bytes'>, 'classmethod': <class 'classmethod'>, 'complex': <class 'complex'>, 'dict': <class 'dict'>, 'enumerate': <class 'enumerate'>, 'filter': <class 'filter'>, 'float': <class 'float'>, 'frozenset': <class 'frozenset'>, 'property': <class 'property'>, 'int': <class 'int'>, 'list': <class 'list'>, 'map': <class 'map'>, 'object': <class 'object'>, 'range': <class 'range'>, 'reversed': <class 'reversed'>, 'set': <class 'set'>, 'slice': <class 'slice'>, 'staticmethod': <class 'staticmethod'>, 'str': <class 'str'>, 'super': <class 'super'>, 'tuple': <class 'tuple'>, 'type': <class 'type'>, 'zip': <class 'zip'>, '__debug__': True, 'BaseException': <class 'BaseException'>, 'BaseExceptionGroup': <class 'BaseExceptionGroup'>, 'Exception': <class 'Exception'>, 'GeneratorExit': <class 'GeneratorExit'>, 'KeyboardInterrupt': <class 'KeyboardInterrupt'>, 'SystemExit': <class 'SystemExit'>, 'ArithmeticError': <class 'ArithmeticError'>, 'AssertionError': <class 'AssertionError'>, 'AttributeError': <class 'AttributeError'>, 'BufferError': <class 'BufferError'>, 'EOFError': <class 'EOFError'>, 'ImportError': <class 'ImportError'>, 'LookupError': <class 'LookupError'>, 'MemoryError': <class 'MemoryError'>, 'NameError': <class 'NameError'>, 'OSError': <class 'OSError'>, 'ReferenceError': <class 'ReferenceError'>, 'RuntimeError': <class 'RuntimeError'>, 'StopAsyncIteration': <class 'StopAsyncIteration'>, 'StopIteration': <class 'StopIteration'>, 'SyntaxError': <class 'SyntaxError'>, 'SystemError': <class 'SystemError'>, 'TypeError': <class 'TypeError'>, 'ValueError': <class 'ValueError'>, 'Warning': <class 'Warning'>, 'FloatingPointError': <class 'FloatingPointError'>, 'OverflowError': <class 'OverflowError'>, 'ZeroDivisionError': <class 'ZeroDivisionError'>, 'BytesWarning': <class 'BytesWarning'>, 'DeprecationWarning': <class 'DeprecationWarning'>, 'EncodingWarning': <class 'EncodingWarning'>, 'FutureWarning': <class 'FutureWarning'>, 'ImportWarning': <class 'ImportWarning'>, 'PendingDeprecationWarning': <class 'PendingDeprecationWarning'>, 'ResourceWarning': <class 'ResourceWarning'>, 'RuntimeWarning': <class 'RuntimeWarning'>, 'SyntaxWarning': <class 'SyntaxWarning'>, 'UnicodeWarning': <class 'UnicodeWarning'>, 'UserWarning': <class 'UserWarning'>, 'BlockingIOError': <class 'BlockingIOError'>, 'ChildProcessError': <class 'ChildProcessError'>, 'ConnectionError': <class 'ConnectionError'>, 'FileExistsError': <class 'FileExistsError'>, 'FileNotFoundError': <class 'FileNotFoundError'>, 'InterruptedError': <class 'InterruptedError'>, 'IsADirectoryError': <class 'IsADirectoryError'>, 'NotADirectoryError': <class 'NotADirectoryError'>, 'PermissionError': <class 'PermissionError'>, 'ProcessLookupError': <class 'ProcessLookupError'>, 'TimeoutError': <class 'TimeoutError'>, 'IndentationError': <class 'IndentationError'>, 'IndexError': <class 'IndexError'>, 'KeyError': <class 'KeyError'>, 'ModuleNotFoundError': <class 'ModuleNotFoundError'>, 'NotImplementedError': <class 'NotImplementedError'>, 'RecursionError': <class 'RecursionError'>, 'UnboundLocalError': <class 'UnboundLocalError'>, 'UnicodeError': <class 'UnicodeError'>, 'BrokenPipeError': <class 'BrokenPipeError'>, 'ConnectionAbortedError': <class 'ConnectionAbortedError'>, 'ConnectionRefusedError': <class 'ConnectionRefusedError'>, 'ConnectionResetError': <class 'ConnectionResetError'>, 'TabError': <class 'TabError'>, 'UnicodeDecodeError': <class 'UnicodeDecodeError'>, 'UnicodeEncodeError': <class 'UnicodeEncodeError'>, 'UnicodeTranslateError': <class 'UnicodeTranslateError'>, 'ExceptionGroup': <class 'ExceptionGroup'>, 'EnvironmentError': <class 'OSError'>, 'IOError': <class 'OSError'>, 'open': <built-in function open>, 'quit': Use quit() or Ctrl-D (i.e. EOF) to exit, 'exit': Use exit() or Ctrl-D (i.e. EOF) to exit, 'copyright': Copyright (c) 2001-2023 Python Software Foundation.
+All Rights Reserved.
+
+Copyright (c) 2000 BeOpen.com.
+All Rights Reserved.
+
+Copyright (c) 1995-2001 Corporation for National Research Initiatives.
+All Rights Reserved.
+
+Copyright (c) 1991-1995 Stichting Mathematisch Centrum, Amsterdam.
+All Rights Reserved., 'credits':     Thanks to CWI, CNRI, BeOpen, Zope Corporation, the Python Software
+    Foundation, and a cast of thousands for supporting Python
+    development.  See www.python.org for more information., 'license': Type license() to see the full license text, 'help': Type help() for interactive help, or help(object) for help about object.}, 'torch': <module 'torch' from '/home/sahanp/.conda/envs/triton-test3/lib/python3.12/site-packages/torch/__init__.py'>, 'nn': <module 'torch.nn' from '/home/sahanp/.conda/envs/triton-test3/lib/python3.12/site-packages/torch/nn/__init__.py'>, 'Model': <class 'Model'>, 'M': 8205, 'K': 2949, 'N': 5921, 'get_inputs': <function get_inputs at 0x7fe7b9d5b2e0>, 'get_init_inputs': <function get_init_inputs at 0x7fe7b9d5b4c0>, 'BUILD_DIRECTORY': '/home/sahanp/repos/KernelBench/cache/test_hf_level_1/8/0'}
+build_directory: /home/sahanp/repos/KernelBench/cache/test_hf_level_1/8/0
+model_custom_src: import os
+os.environ['TORCH_EXTENSIONS_DIR'] = '/home/sahanp/repos/KernelBench/cache/test_hf_level_1/8/0'
+import torch
+import torch.nn as nn
+import triton
+import triton.language as tl
+
+@triton.jit
+def matmul_kernel(
+    A_ptr,         # Pointer to matrix A
+    B_ptr,         # Pointer to matrix B
+    C_ptr,         # Pointer to output matrix C
+    M, N, K,       # Matrix dimensions
+    stride_am, stride_ak,  # Strides for matrix A
+    stride_bk, stride_bn,  # Strides for matrix B
+    stride_cm, stride_cn,  # Strides for matrix C
+    BLOCK_SIZE_M: tl.constexpr, BLOCK_SIZE_N: tl.constexpr, BLOCK_SIZE_K: tl.constexpr
+):
+    # Program ID for the current block
+    pid = tl.program_id(axis=0)
+    num_pid_m = tl.cdiv(M, BLOCK_SIZE_M)
+    num_pid_n = tl.cdiv(N, BLOCK_SIZE_N)
+    pid_m = pid // num_pid_n
+    pid_n = pid % num_pid_n
+
+    # Offsets for the block in A and B
+    offs_am = (pid_m * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)) % M
+    offs_bn = (pid_n * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)) % N
+    offs_k = tl.arange(0, BLOCK_SIZE_K)
+
+    # Pointers to the blocks in A and B
+    A_block_ptr = A_ptr + offs_am[:, None] * stride_am + offs_k[None, :] * stride_ak
+    B_block_ptr = B_ptr + offs_k[:, None] * stride_bk + offs_bn[None, :] * stride_bn
+
+    # Initialize accumulator
+    acc = tl.zeros((BLOCK_SIZE_M, BLOCK_SIZE_N), dtype=tl.float32)
+
+    # Loop over K dimension
+    for k in range(0, K, BLOCK_SIZE_K):
+        a = tl.load(A_block_ptr, mask=offs_k[None, :] < K - k, other=0.0)
+        b = tl.load(B_block_ptr, mask=offs_k[:, None] < K - k, other=0.0)
+        acc += tl.dot(a, b)
+        A_block_ptr += BLOCK_SIZE_K * stride_ak
+        B_block_ptr += BLOCK_SIZE_K * stride_bk
+
+    # Store the result in C
+    offs_cm = pid_m * BLOCK_SIZE_M + tl.arange(0, BLOCK_SIZE_M)
+    offs_cn = pid_n * BLOCK_SIZE_N + tl.arange(0, BLOCK_SIZE_N)
+    C_block_ptr = C_ptr + offs_cm[:, None] * stride_cm + offs_cn[None, :] * stride_cn
+    tl.store(C_block_ptr, acc, mask=(offs_cm[:, None] < M) & (offs_cn[None, :] < N))
+
+def triton_matmul(A: torch.Tensor, B: torch.Tensor) -> torch.Tensor:
+    """
+    This function wraps the Triton kernel call for matrix multiplication.
+    """
+    assert A.is_cuda and B.is_cuda, "Tensors must be on CUDA."
+    A = A.contiguous()
+    B = B.contiguous()
+
+    M, K = A.shape
+    K, N = B.shape
+    C = torch.empty((M, N), device=A.device, dtype=A.dtype)
+
+    BLOCK_SIZE_M = 64
+    BLOCK_SIZE_N = 64
+    BLOCK_SIZE_K = 32
+
+    grid = lambda meta: ((M + meta['BLOCK_SIZE_M'] - 1) // meta['BLOCK_SIZE_M']) * ((N + meta['BLOCK_SIZE_N'] - 1) // meta['BLOCK_SIZE_N']),
+
+    matmul_kernel[grid](
+        A, B, C, M, N, K,
+        A.stride(0), A.stride(1),
+        B.stride(0), B.stride(1),
+        C.stride(0), C.stride(1),
+        BLOCK_SIZE_M=BLOCK_SIZE_M, BLOCK_SIZE_N=BLOCK_SIZE_N, BLOCK_SIZE_K=BLOCK_SIZE_K
+    )
+    return C
+
+class ModelNew(nn.Module):
+    def __init__(self):
+        super(ModelNew, self).__init__()
+
+    def forward(self, A: torch.Tensor, B: torch.Tensor) -> torch.Tensor:
+        return triton_matmul(A, B)
+Failed to compile custom CUDA kernel: Record as compilation failure.
+Error: could not get source code
+--------------------------------------------------------------------------------------------------------------------------------
+[Eval Result] Problem ID: 8, Sample ID: 0
+compiled=False correctness=False metadata={'hardware': 'NVIDIA H100', 'device': 'cuda:0', 'compilation_error': OSError('could not get source code')} runtime=-1.0 runtime_stats={}
+Adding Eval Result to file for problem 8 sample 0
+[WARNING] Metadata is not JSON serializable, error: Object of type OSError is not JSON serializable
+[WARNING] Metadata now converted to be JSON serializable: {'hardware': 'NVIDIA H100', 'device': 'cuda:0', 'compilation_error': 'could not get source code'}
+--------------------------------------------------------------------------------------------------------------------------------
+[Curr batch] Evaluation took 3.49 seconds
+[Curr Batch] 1 tasks over 1 GPUs; [Total Work left] 91

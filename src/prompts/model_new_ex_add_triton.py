@@ -62,13 +62,3 @@ class ModelNew(nn.Module):
     def forward(self, a, b):
         # Instead of "return a + b", call our Triton-based addition
         return triton_add(a, b)
-
-def get_inputs():
-    # randomly generate input tensors based on the model architecture
-    a = torch.randn(1, 128).cuda()
-    b = torch.randn(1, 128).cuda()
-    return [a, b]
-
-def get_init_inputs():
-    # randomly generate tensors required for initialization based on the model architecture
-    return []
