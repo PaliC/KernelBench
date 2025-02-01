@@ -48,6 +48,4 @@ def greedy_analysis(run_name, level):
     print(f"Correctness rate: {correct_count/total_count*100:.1f}%")
 
 
-greedy_analysis("test_llama_1", 1)
-greedy_analysis("test_llama_2", 2)
-greedy_analysis("test_llama_3", 3)
+greedy_analysis(run_name=run_name, level=level)
