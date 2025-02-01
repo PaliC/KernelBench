@@ -23,7 +23,7 @@ We construct Kernel Bench to have 4 Levels of categories:
 - Level 4: Level Hugging Face
     Optimize whole model architectures from HuggngFace
 
-For this benchmark, we care whether if a solution 
+For this benchmark, we care whether if a solution
 - compiles: generated torch code was able to load the inline embedded CUDA Kernel and build the kernel
 - is correct: check against reference torch operators n_correctness times on randomized inputs
 - is fast: compare against reference torch operators n_trial times for both eager mode and torch.compile execution
@@ -35,7 +35,7 @@ KernelBench/
 ├── assets/
 ├── KernelBench/ # Benchmark dataset files
 ├── src/ # KernelBench logic code
-│   ├── unit_tests/  
+│   ├── unit_tests/
 │   ├── prompts/
 │   ├── ....
 ├── scripts/ # helpful scripts to run the benchmark
@@ -48,16 +48,16 @@ KernelBench/
 conda create --name kernel-bench python=3.10
 conda activate kernel-bench
 pip install -r requirements.txt
-pip install -e . 
+pip install -e .
 ```
 
 To call LLM API providers, set your `{INFERENCE_SERVER_PROVIDER}_API_KEY` API key.
 
-Running and profiling kernels require a GPU. 
+Running and profiling kernels require a GPU.
 [Coming soon] If you don't have GPU available locally, you can set up [Modal](https://modal.com/). Set up your modal token.
 
 ## 🚀 Usage
-### Run on a single problem 
+### Run on a single problem
 It is easier to get started with a single problem. This will fetch the problem, generate a sample, and evaluate the sample.
 
 ```
@@ -65,11 +65,15 @@ It is easier to get started with a single problem. This will fetch the problem, 
 
 python3 scripts/generate_and_eval_single_sample.py dataset_src="huggingface" level=2 problem_id=40
 
+# in order to test triton instead of cuda simply add a framework="triton" flag
+
+python3 scripts/generate_and_eval_single_sample.py dataset_src="huggingface" level=2 problem_id=40 framework="triton"
+
 # dataset_src could be "local" or "huggingface"
 # add .verbose_logging for more visbility
 ```
 
-### Run on all problems 
+### Run on all problems
 
 ```
 # 1. Generate responses and store kernels locally to runs/{run_name} directory
@@ -78,7 +82,17 @@ python3 scripts/generate_samples.py run_name="test_hf_level_1" dataset_src="hugg
 # 2. Evaluate on all generated kernels in runs/{run_name} directory
 python3 scripts/eval_from_generations.py level=1 run_name="test_hf_level_1" dataset_src="local" level="1" num_gpu_devices=8 timeout=300
 
+# Similarily, one can test triton instead of cuda simply add a framework="triton" flag
+
+# 1. Generate responses and store kernels locally to runs/{run_name} directory
+python3 scripts/generate_samples.py run_name="test_hf_level_1" dataset_src="huggingface" level="1" num_workers=50 server_type="deepseek" model_name="deepseek-coder" temperature=0 framework="triton"
+
+# 2. Evaluate on all generated kernels in runs/{run_name} directory
+python3 scripts/eval_from_generations.py level=1 run_name="test_hf_level_1" dataset_src="local" level="1" num_gpu_devices=8 timeout=300 framework="triton"
+
 ```
+
+### Run on all p
 
 You can check out `scripts/greedy_analysis.py` to analyze the eval results.
 We provide some reference baseline times on NVIDIA L40S in `results/timing` (soon also on H100).
@@ -99,9 +113,9 @@ MIT. Check `LICENSE.md` for more details.
 ## Citing
 ```bibtex
 @misc{ouyang2024kernelbench,
-      title={KernelBench: Can LLMs Write GPU Kernels?}, 
+      title={KernelBench: Can LLMs Write GPU Kernels?},
       author={Anne Ouyang and Simon Guo and Azalia Mirhoseini},
       year={2024},
-      url={https://scalingintelligence.stanford.edu/blogs/kernelbench/}, 
+      url={https://scalingintelligence.stanford.edu/blogs/kernelbench/},
 }
 ```
