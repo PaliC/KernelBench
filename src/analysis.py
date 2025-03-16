@@ -154,12 +154,14 @@ def get_correctness_issue_type_triton(eval_result_metadata: dict) -> str | None:
         
         specific_runtime_error = eval_result_metadata['runtime_error']
         if keywords_in_error(specific_runtime_error, ['not defined']):
+            # TODO: (Sahan) maybe don't categorize this one
             correctness_issue_type = 'undefined_variable'
         elif keywords_in_error(specific_runtime_error, ['expected size', 'number of dimensions', 'shapes']):
             correctness_issue_type = 'dimension_issues'
         elif keywords_in_error(specific_runtime_error, ['cpu']):
             correctness_issue_type = 'device_error'
         else:
+            # TODO: (Sahan) make a better name
             print(f"Unknown runtime error: {specific_runtime_error}")
             # raise Exception("Unknown runtime error:", specific_runtime_error)
             correctness_issue_type = 'runtime_error'

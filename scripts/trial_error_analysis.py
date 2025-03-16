@@ -29,8 +29,8 @@ class AnalysisConfig(Config):
         self.run_name = REQUIRED # name of the run to evaluate
         self.level = REQUIRED # level to evaluate
 
-        self.hardware = REQUIRED # hardware to evaluate
-        self.baseline = REQUIRED # baseline to compare against
+        # self.hardware = REQUIRED # hardware to evaluate
+        # self.baseline = REQUIRED # baseline to compare against
 
     def __repr__(self):
         return f"AnalysisConfig({self.to_dict()})"
@@ -51,9 +51,9 @@ def patch(eval_results, dataset):
             }
     return eval_results
 
-def analyze_greedy_eval(run_dir, run_name, hardware, baseline, level):
+def analyze_error_types(run_dir, run_name, level):
     """
-    Analyze the greedy eval results for a run of a particular level
+    Analyze the error types for a run of a particular level
     """
 
     dataset = construct_kernelbench_dataset(level)
@@ -62,14 +62,14 @@ def analyze_greedy_eval(run_dir, run_name, hardware, baseline, level):
     eval_file_path = f'{run_dir}/{run_name}/eval_results.json'
     assert os.path.exists(eval_file_path), f"Eval file does not exist at {eval_file_path}"
 
-    baseline_file_path = f'results/timing/{hardware}/{baseline}.json'
-    assert os.path.exists(baseline_file_path), f"Baseline file does not exist at {baseline_file_path}"
+    # baseline_file_path = f'results/timing/{hardware}/{baseline}.json'
+    # assert os.path.exists(baseline_file_path), f"Baseline file does not exist at {baseline_file_path}"
 
     with open(eval_file_path, 'r') as f:
         eval_results = json.load(f)
 
-    with open(baseline_file_path, 'r') as f:
-        baseline_results = json.load(f)
+    # with open(baseline_file_path, 'r') as f:
+    #     baseline_results = json.load(f)
 
     # Initialize counters
     total_count = len(dataset)
@@ -140,7 +140,7 @@ def analyze_greedy_eval(run_dir, run_name, hardware, baseline, level):
 
 @pydra.main(base=AnalysisConfig)
 def main(config: AnalysisConfig):
-    analyze_greedy_eval(config.run_dir, config.run_name, config.hardware, config.baseline, config.level)
+    analyze_error_types(config.run_dir, config.run_name, config.level)
 
 if __name__ == "__main__":
     main()
