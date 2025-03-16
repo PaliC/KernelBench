@@ -1,0 +1,20 @@
+api_query_interval: 0.0
+dataset_name: ScalingIntelligence/KernelBench
+dataset_src: huggingface
+framework: triton
+greedy_sample: true
+is_reasoning_model: false
+level: 1
+log_prompt: false
+max_tokens: 4096
+model_name: meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo
+num_workers: 50
+run_name: test_hf_level_1_triton_llama3_8b
+runs_dir: /sailhome/simonguo/cuda_monkeys/KernelBenchInternal/runs
+server_type: together
+store_type: local
+subset:
+- null
+- null
+temperature: 0
+verbose: false
